@@ -254,15 +254,19 @@
 #   Workspaces              |
 #---------------------------/
     # Force move (Get class with f.ex: xprop | grep WM_CLASS)
-        assign      [class="Sublime_text"]                      $Workspace_3;   move workspace to $monitor_left
+        assign      [class="Sublime_text"]                      $Workspace_3
+        for_window  [class="Sublime_text"]                      move workspace to $monitor_left
 
-        assign      [class="jetbrains-pycharm"]                 $Workspace_3;
-        assign      [class="jetbrains-phpstorm"]                $Workspace_3;
+        assign      [class="jetbrains-pycharm"]                 $Workspace_3
+        assign      [class="jetbrains-phpstorm"]                $Workspace_3
 
-        assign      [class="Steam"]                             $Workspace_5;
+        assign      [class="Steam"]                             $Workspace_5
         
-        assign      [class="Mumble"]                            $Workspace_9;   move workspace to $monitor_right
+        assign      [class="Mumble"]                            $Workspace_9
+        for_window  [class="Mumble"]                            move workspace to $monitor_right
 
-        assign      [class="Wine" instance="TeamViewer.exe"]    $Workspace_TV;  move workspace to $monitor_right
+        assign      [class="Wine" instance="TeamViewer.exe"]    $Workspace_TV
+        for_window  [class="Wine" instance="TeamViewer.exe"]    move workspace to $monitor_right
 
-        assign      [class="VirtualBox"]                        $Workspace_VM;  move workspace to $monitor_right
+        assign      [class="VirtualBox"]                        $Workspace_VM
+        for_window  [class="VirtualBox"]                        move workspace to $monitor_right
