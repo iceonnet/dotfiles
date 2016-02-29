@@ -1,0 +1,288 @@
+# i3 config file (v4)
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# Font Explorer http://bluejamesbond.github.io/CharacterMap/ or
+# the Font Awesome Cheatsheet https://fortawesome.github.io/Font-Awesome/cheatsheet/
+
+
+#---------------------------\
+#   Config                  |
+#---------------------------/
+
+    # Fonts
+        font pango:DejaVu Sans 10
+
+    # Coloring
+        client.background       #2f343f
+
+        # Colorclass                border      backgr.     text        indicator
+        client.focused              #2f343f     #2f343f     #cccccc     #1f1f1f
+        client.focused_inactive     #2f343f     #2f343f     #777777     #1f1f1f
+        client.unfocused            #2f343f     #2f343f     #7C7F82     #1f1f1f
+        client.urgent               #2f343f     #2f343f     #ffffff     #1f1f1f
+        client.placeholder          #2f343f     #2f343f     #ffffff     #1f1f1f
+
+    # i3bar
+        bar {
+
+            colors {
+                background      #2f343f
+                statusline      #7C7F82
+                separator       #1C1F22
+
+                # colorclass        border      background  text
+                focused_workspace   #090909     #090909     #afb8c5
+                active_workspace    #090909     #090909     #777777
+                inactive_workspace  #090909     #090909     #333333
+                urgent_workspace    #090909     #090909     #ff0000
+            }
+            font pango:FontAwesome 10
+            status_command i3blocks -c ~/.i3/i3blocks.conf
+            separator_symbol " "
+            strip_workspace_numbers yes
+        }
+        # Bindings for i3blocks
+        bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+        bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+
+    # Startup applications
+        # Set Wallpaper
+        exec_always --no-startup-id feh --no-xinerama --bg-center  ~/Pictures/Wallpapers/14_-_o7ceo.jpg &
+
+        # Start TeamViewer monitoring
+        exec --no-startup-id killall tv_start.sh && sleep 1 && ~/bin/tv_start.sh &
+
+        # Start Dropbox
+        exec --no-startup-id dropbox start &
+
+        # Lock
+        exec --no-startup-id sleep 1 && lock &
+
+        # Power Manager
+        exec --no-startup-id xfce4-power-manager &
+
+        # Compton
+        exec --no-startup-id compton -f -D 5 &
+
+    # Minor changes
+        # Set the size of Window border
+            new_window normal 1 px
+
+        # Pressing a workspace button repeatingly will return you to the origin
+            workspace_auto_back_and_forth yes
+
+
+
+#---------------------------\
+#   Variables               |
+#---------------------------/
+
+    # Monitors
+        set $monitor_left  output DVI-I-1
+        set $monitor_right output DVI-D-0
+
+    # Pulse Auto sink (get sink with pactl list sinks)
+        set $pulse_sink 2
+
+    # Screenshot Folder
+        set $screenshot_folder  ~/Pictures/Screenshots
+
+    # Workspaces
+        #   variable            Name
+        set $Workspace_1        1 
+        set $Workspace_2        2
+        set $Workspace_3        3 
+        set $Workspace_4        4
+        set $Workspace_5        5 
+        set $Workspace_6        6
+        set $Workspace_7        7
+        set $Workspace_8        8
+        set $Workspace_9        9 Mumble
+        set $Workspace_VM       10 VM
+        set $Workspace_TV       TeamViewer
+        set $Workspace_Terminal Terminal
+
+
+
+#---------------------------\
+#   Bindings                |
+#---------------------------/
+    
+    # Note: get keys with xev or xmodmap (-pke)
+
+    # Mod key (Windows/Super)
+        set $mod Mod4
+
+    # Execute
+        # Terminal
+            bindsym $mod+Return exec i3-sensible-terminal
+
+        # dmenu
+            bindsym $mod+d exec --no-startup-id xrdb ~/.Xresources; exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -p "run:"' # requires rofi
+            # bindsym $mod+d exec j4-dmenu-desktop  # requires j4-dmenu-desktop
+            # bindsym $mod+d exec dmenu_run         # backup
+
+    # Floating windows
+        # move floating windows (Mod+Mouse)
+            floating_modifier $mod
+
+    # Focus
+        # Change focus
+            bindsym $mod+Left  focus left
+            bindsym $mod+Down  focus down
+            bindsym $mod+Up    focus up
+            bindsym $mod+Right focus right
+
+        # Change focus between tiling / floating windows
+            bindsym $mod+space focus mode_toggle
+
+        # Enter fullscreen mode for the focused container
+            bindsym $mod+f fullscreen toggle
+
+        # Kill focused window
+            bindsym $mod+Shift+q kill
+
+        # Move focused window
+            bindsym $mod+Shift+Left  move left
+            bindsym $mod+Shift+Down  move down
+            bindsym $mod+Shift+Up    move up
+            bindsym $mod+Shift+Right move right
+
+    # Layout
+        # Change container layout (stacked, tabbed, toggle split)
+            bindsym $mod+s layout stacking
+            bindsym $mod+w layout tabbed
+            bindsym $mod+e layout toggle split
+
+        # Toggle tiling / floating
+            bindsym $mod+Shift+space floating toggle
+
+    # Modes
+        # Resize
+            bindsym $mod+r mode "resize"
+
+        # System shutdown menu
+            bindsym $mod+Scroll_Lock mode "$mode_system"
+
+    # Other
+        # Exit i3 (logs you out of your X session)
+            bindsym $mod+Shift+e  mode "$mode_system"
+
+        # Split in horizontal orientation
+            bindsym $mod+h split h
+
+        # Split in vertical orientation
+            bindsym $mod+v split v
+
+        # Reload the configuration file
+            bindsym $mod+Shift+c reload
+
+        # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+            bindsym $mod+Shift+r restart
+
+        # Lock workstation
+            bindsym $mod+l       exec lock
+            bindsym $mod+Shift+l exec lock
+
+    # Screenshot
+        #bindsym $mod+Screen exec --no-startup-id scrot '~/%Y-%m-%d_$wx$h-%H%M%S.png' -e 'mv $f ~/Pictures/Screenshots/ | feh'
+        bindsym Print                       exec scrot -m -e 'mv $f $screenshot_folder'
+        bindsym $mod+Print --release        exec scrot -s -e 'mv $f $screenshot_folder'
+        bindsym $mod+Shift+Print --release  exec scrot -u -e 'mv $f $screenshot_folder'
+
+    # Volume controls for Pulse
+        bindsym XF86AudioRaiseVolume        exec pactl set-sink-volume $pulse_sink +1%;    exec pkill -SIGRTMIN+10 i3blocks
+        bindsym XF86AudioLowerVolume        exec pactl set-sink-volume $pulse_sink -1%;    exec pkill -SIGRTMIN+10 i3blocks
+        bindsym XF86AudioMute               exec pactl set-sink-mute   $pulse_sink toggle; exec pkill -SIGRTMIN+10 i3blocks
+
+        # used to update Volume block
+        exec_always sleep 0.1 && pkill -SIGRTMIN+10 i3blocks
+
+    # Workspaces
+        # Switch to workspace
+            bindsym $mod+1                  workspace $Workspace_1;         move workspace to $monitor_left
+            bindsym $mod+2                  workspace $Workspace_2;         move workspace to $monitor_left
+            bindsym $mod+3                  workspace $Workspace_3;         move workspace to $monitor_left
+            bindsym $mod+4                  workspace $Workspace_4;         move workspace to $monitor_left
+            bindsym $mod+5                  workspace $Workspace_5;         move workspace to $monitor_left
+            bindsym $mod+6                  workspace $Workspace_6;         move workspace to $monitor_right
+            bindsym $mod+7                  workspace $Workspace_7;         move workspace to $monitor_right
+            bindsym $mod+8                  workspace $Workspace_8;         move workspace to $monitor_right
+            bindsym $mod+9                  workspace $Workspace_9;         move workspace to $monitor_right
+            bindsym $mod+0                  workspace $Workspace_VM;        move workspace to $monitor_right;   layout tabbed
+            bindsym $mod+plus               workspace $Workspace_TV;        move workspace to $monitor_right
+            bindsym $mod+backslash          workspace $Workspace_Terminal;  move workspace to $monitor_right
+
+        # Move focused container to workspace
+            bindsym $mod+Shift+1            move container to workspace     $Workspace_1;
+            bindsym $mod+Shift+2            move container to workspace     $Workspace_2;
+            bindsym $mod+Shift+3            move container to workspace     $Workspace_3;
+            bindsym $mod+Shift+4            move container to workspace     $Workspace_4;
+            bindsym $mod+Shift+5            move container to workspace     $Workspace_5;
+            bindsym $mod+Shift+6            move container to workspace     $Workspace_6;
+            bindsym $mod+Shift+7            move container to workspace     $Workspace_7;
+            bindsym $mod+Shift+8            move container to workspace     $Workspace_8;
+            bindsym $mod+Shift+9            move container to workspace     $Workspace_9;
+            bindsym $mod+Shift+0            move container to workspace     $Workspace_VM;
+            bindsym $mod+Shift+plus         move container to workspace     $Workspace_TV;
+            bindsym $mod+Shift+backslash    move container to workspace     $Workspace_Terminal;
+
+        # Move Workspace to specific monitor
+            bindsym $mod+Shift+n            move workspace to $monitor_left
+            bindsym $mod+Shift+m            move workspace to $monitor_right
+
+
+
+#---------------------------\
+#   Modes                   |
+#---------------------------/
+
+    # Resize
+        mode "resize" { # These bindings trigger as soon as you enter the resize mode
+                bindsym Left  resize shrink width   5 px or 5 ppt
+                bindsym Down  resize grow   height  5 px or 5 ppt
+                bindsym Up    resize shrink height  5 px or 5 ppt
+                bindsym Right resize grow   width   5 px or 5 ppt
+
+                # back to normal: Enter or Escape
+                bindsym Escape mode "default"
+        }
+
+    # System shutdown menu
+        set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+        mode "$mode_system" {
+            bindsym l       exec --no-startup-id i3exit lock,      mode "default"
+            bindsym e       exec --no-startup-id i3exit logout,    mode "default"
+            bindsym s       exec --no-startup-id i3exit suspend,   mode "default"
+            bindsym h       exec --no-startup-id i3exit hibernate, mode "default"
+            bindsym r       exec --no-startup-id i3exit reboot,    mode "default"
+            bindsym Shift+s exec --no-startup-id i3exit shutdown,  mode "default"
+
+            # back to normal: Enter or Escape
+            bindsym Escape  mode "default"
+        }
+
+
+
+#---------------------------\
+#   Workspaces              |
+#---------------------------/
+    # Force move (Get class with f.ex: xprop | grep WM_CLASS)
+        assign      [class="Atom"]                              $Workspace_3
+        for_window  [class="Atom"]                              move workspace to $monitor_left
+        assign      [class="Sublime_text"]                      $Workspace_3
+        for_window  [class="Sublime_text"]                      move workspace to $monitor_left
+
+        assign      [class="jetbrains-pycharm"]                 $Workspace_3
+        assign      [class="jetbrains-phpstorm"]                $Workspace_3
+
+        assign      [class="Steam"]                             $Workspace_5
+        
+        assign      [class="Mumble"]                            $Workspace_9
+        for_window  [class="Mumble"]                            move workspace to $monitor_right
+
+        assign      [class="Wine" instance="TeamViewer.exe"]    $Workspace_TV
+        for_window  [class="Wine" instance="TeamViewer.exe"]    move workspace to $monitor_right
+
+        assign      [class="VirtualBox"]                        $Workspace_VM
+        for_window  [class="VirtualBox"]                        move workspace to $monitor_right

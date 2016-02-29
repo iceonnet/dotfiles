@@ -1,0 +1,15 @@
+rofi.bc:                             #2B303B
+rofi.bg:                             #2B303B
+rofi.bgalt:                          #2B303B
+rofi.color-enabled:                  false
+rofi.columns:                        1
+rofi.fg:                             #8b909b
+rofi.font:                           mono 24
+rofi.fuzzy:                          true
+rofi.hlbg:                           #2B303B
+rofi.hlfg:                           #ffffff
+rofi.lines:                          5
+rofi.modi:                           window
+rofi.opacity:                        85
+rofi.padding:                        720
+rofi.width:                          100
