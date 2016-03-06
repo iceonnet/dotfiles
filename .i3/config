@@ -129,10 +129,10 @@
             bindsym $mod+Shift+q kill
 
         # Move focused window
-            bindsym $mod+Shift+Left  move left
-            bindsym $mod+Shift+Down  move down
-            bindsym $mod+Shift+Up    move up
-            bindsym $mod+Shift+Right move right
+            bindsym $mod+Shift+Left  move left  96px
+            bindsym $mod+Shift+Down  move down  96px
+            bindsym $mod+Shift+Up    move up    96px
+            bindsym $mod+Shift+Right move right 96px
 
     # Layout
         # Change container layout (stacked, tabbed, toggle split)
@@ -142,6 +142,8 @@
 
         # Toggle tiling / floating
             bindsym $mod+Shift+space floating toggle
+
+        bindsym $mod+c floating disable; floating enable; resize set 1120 1061; move right 400
 
     # Modes
         # Resize
@@ -167,11 +169,10 @@
             bindsym $mod+Shift+r restart
 
         # Lock workstation
-            bindsym $mod+l       exec lock
-            bindsym $mod+Shift+l exec lock
+            bindsym $mod+l       exec xautolock -locknow
+            bindsym $mod+Shift+l exec xautolock -locknow
 
     # Screenshot
-        #bindsym $mod+Screen exec --no-startup-id scrot '~/%Y-%m-%d_$wx$h-%H%M%S.png' -e 'mv $f ~/Pictures/Screenshots/ | feh'
         bindsym Print                       exec scrot -m -e 'mv $f $screenshot_folder'
         bindsym $mod+Print --release        exec scrot -s -e 'mv $f $screenshot_folder'
         bindsym $mod+Shift+Print --release  exec scrot -u -e 'mv $f $screenshot_folder'
@@ -225,10 +226,10 @@
 
     # Resize
         mode "resize" { # These bindings trigger as soon as you enter the resize mode
-            bindsym Left  resize shrink width   1 px or 1 ppt
-            bindsym Down  resize grow   height  1 px or 1 ppt
-            bindsym Up    resize shrink height  1 px or 1 ppt
-            bindsym Right resize grow   width   1 px or 1 ppt
+            bindsym Left  resize shrink width   50 px or 1 ppt
+            bindsym Right resize grow   width   50 px or 1 ppt
+            bindsym Up    resize shrink height  25 px or 2 ppt
+            bindsym Down  resize grow   height  25 px or 2 ppt
 
             # back to normal: Enter or Escape
                 bindsym Escape mode "default"
