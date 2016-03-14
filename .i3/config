@@ -83,8 +83,8 @@
             strip_workspace_numbers yes
         }
         # Bindings for i3blocks (Caps/NumLock)
-            bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
-            bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+            bindsym --release Caps_Lock exec --no-startup-id pkill -SIGRTMIN+11 i3blocks
+            bindsym --release Num_Lock  exec --no-startup-id pkill -SIGRTMIN+11 i3blocks
 
     # Startup applications
         exec --no-startup-id bash ~/bin/startup.sh &
@@ -103,7 +103,7 @@
 
     # Execute
         # Terminal
-            bindsym $mod+Return exec i3-sensible-terminal
+            bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
         # dmenu
             bindsym $mod+d exec --no-startup-id xrdb ~/.Xresources; exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -p "run:"' # requires rofi
@@ -129,10 +129,10 @@
             bindsym $mod+Shift+q kill
 
         # Move focused window
-            bindsym $mod+Shift+Left  move left  96px
-            bindsym $mod+Shift+Down  move down  96px
-            bindsym $mod+Shift+Up    move up    96px
-            bindsym $mod+Shift+Right move right 96px
+            bindsym $mod+Shift+Left  move left  48px
+            bindsym $mod+Shift+Down  move down  48px
+            bindsym $mod+Shift+Up    move up    48px
+            bindsym $mod+Shift+Right move right 48px
 
     # Layout
         # Change container layout (stacked, tabbed, toggle split)
@@ -171,6 +171,9 @@
         # Lock workstation
             bindsym $mod+l       exec xautolock -locknow
             bindsym $mod+Shift+l exec xautolock -locknow
+
+        # Kill window
+            bindsym --release button2 kill
 
     # Screenshot
         bindsym Print                       exec scrot -m -e 'mv $f $screenshot_folder'
@@ -225,18 +228,17 @@
 #---------------------------/
 
     # Resize
-        mode "resize" { # These bindings trigger as soon as you enter the resize mode
+        mode "resize" {
             bindsym Left  resize shrink width   50 px or 1 ppt
             bindsym Right resize grow   width   50 px or 1 ppt
             bindsym Up    resize shrink height  25 px or 2 ppt
             bindsym Down  resize grow   height  25 px or 2 ppt
 
-            # back to normal: Enter or Escape
-                bindsym Escape mode "default"
+            bindsym Escape mode "default"
         }
 
     # System shutdown menu
-        set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+        set $mode_system (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
         mode "$mode_system" {
             bindsym l       exec --no-startup-id i3exit lock,      mode "default"
             bindsym e       exec --no-startup-id i3exit logout,    mode "default"
