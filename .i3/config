@@ -17,12 +17,16 @@
         set $unfocused          #5f646f
         set $urgent             #ff0000
 
+    # Font
+        set $fontsize 8
+
     # Mod key (Windows/Super)
         set $mod Mod4
 
     # Monitors (found with xrandr)
-        set $monitor_main       DP-1
-        set $monitor_extra      HDMI-0
+        set $monitor_main       DP-0
+        #set $monitor_extra      HDMI-0
+        set $monitor_extra      DVI-D-0
 
     # Pulse Auto sink (get sink with pactl list sinks)
         set $pulse_sink 2
@@ -51,7 +55,7 @@
 #---------------------------/
 
     # Fonts
-        font pango:DejaVu Sans 10
+        font pango:DejaVu Sans $fontsize
 
     # Coloring
         client.background           $background
@@ -76,7 +80,7 @@
                 inactive_workspace  $background     $background         $unfocused
                 urgent_workspace    $background     $background         $urgent
             }
-            font pango:FontAwesome 10
+            font pango:FontAwesome $fontsize
             separator_symbol " "
             status_command i3blocks -c ~/.i3/i3blocks.conf
             strip_workspace_numbers yes
@@ -101,12 +105,14 @@
     
     # Note: get keys with xev or xmodmap (-pke)
 
+    bindsym $mod+Shift+T exec --no-startup-id "killall dunst; ~/bin/notifications/temperature.sh"
+
     # Execute
         # Terminal
             bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
         # dmenu
-            bindsym $mod+d exec --no-startup-id xrdb ~/.Xresources; exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -p "run:"' # requires rofi
+            bindsym $mod+d exec --no-startup-id xrdb ~/.Xresources; exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -i -p "run:"' # requires rofi
 
     # Floating windows
         # move floating windows (Mod+Mouse)
@@ -128,12 +134,6 @@
         # Kill focused window
             bindsym $mod+Shift+q kill
 
-        # Move focused window
-            bindsym $mod+Shift+Left  move left  48px
-            bindsym $mod+Shift+Down  move down  48px
-            bindsym $mod+Shift+Up    move up    48px
-            bindsym $mod+Shift+Right move right 48px
-
     # Layout
         # Change container layout (stacked, tabbed, toggle split)
             bindsym $mod+s layout stacking
@@ -146,9 +146,15 @@
         # Toggle Scratchpad
             bindsym $mod+Ctrl+space move scratchpad
             bindsym $mod+Mod1+space scratchpad show
+        # Move window in container
+            bindsym $mod+Shift+Left  move left
+            bindsym $mod+Shift+Right move right
+            bindsym $mod+Shift+Up    move up
+            bindsym $mod+Shift+Down  move down
 
         # bindsym $mod+c floating disable; floating enable; resize set 1120 1061; move right 400
-        bindsym $mod+c floating disable; floating enable; resize set 1920 1417; move position center
+        bindsym $mod+Shift+c floating disable; floating enable; resize set 1620 1020; move position center
+        bindsym $mod+c move position center
 
     # Modes
         # Resize
@@ -161,7 +167,7 @@
         # Main only
             bindsym $mod+F12 exec xrandr --output $monitor_extra --off
         # Both
-            bindsym $mod+F11 exec xrandr --output $monitor_extra --right-of DP-1 --auto; restart
+            bindsym $mod+F11 exec "xrandr --output $monitor_main --auto; xrandr --output $monitor_extra --right-of $monitor_main --auto;"
 
     # Other
         # Exit i3 (logs you out of your X session)
@@ -172,9 +178,6 @@
 
         # Split in vertical orientation
             bindsym $mod+v split v
-
-        # Reload the configuration file
-            bindsym $mod+Shift+c reload
 
         # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
             bindsym $mod+Shift+r restart
@@ -210,7 +213,7 @@
             bindsym $mod+7                  workspace $Workspace_7;         move workspace to output $monitor_extra;
             bindsym $mod+8                  workspace $Workspace_8;         move workspace to output $monitor_extra;
             bindsym $mod+9                  workspace $Workspace_9;         move workspace to output $monitor_extra;
-            bindsym $mod+0                  workspace $Workspace_VM;        move workspace to output $monitor_extra;   layout tabbed
+            bindsym $mod+0                  workspace $Workspace_VM;        move workspace to output $monitor_extra;    layout tabbed
             bindsym $mod+plus               workspace $Workspace_TV;        move workspace to output $monitor_extra;
 
         # Move focused container to workspace
@@ -231,7 +234,10 @@
             bindsym $mod+Shift+m            move workspace to output $monitor_extra
 
 
-
+        bindsym $mod+Ctrl+Left  resize shrink width   50 px or 1 ppt
+        bindsym $mod+Ctrl+Right resize grow   width   50 px or 1 ppt
+        bindsym $mod+Ctrl+Up    resize shrink height  25 px or 2 ppt
+        bindsym $mod+Ctrl+Down  resize grow   height  25 px or 2 ppt
 #---------------------------\
 #   Modes                   |
 #---------------------------/
@@ -265,18 +271,19 @@
 #   Workspaces              |
 #---------------------------/
     # Force move (Get class with f.ex: xprop | grep WM_CLASS)
-        # assign      [class="Sublime_text"]                      $Workspace_3
+        assign      [class="Sublime_text"]                      $Workspace_3
 
-        # assign      [class="jetbrains-pycharm"]                 $Workspace_3
-        # assign      [class="jetbrains-phpstorm"]                $Workspace_3
+        assign      [class="jetbrains-pycharm"]                 $Workspace_3
+        assign      [class="jetbrains-phpstorm"]                $Workspace_3
 
-        # assign      [class="Steam"]                             $Workspace_5
+        assign      [class="Steam"]                             $Workspace_5
+        for_window  [workspace="$Workspace_5"]                  floating enable
 
-        # assign      [class="Mumble"]                            $Workspace_9
+        assign      [class="Mumble"]                            $Workspace_9
 
-        # assign      [class="Wine" instance="TeamViewer.exe"]    $Workspace_TV
+        assign      [class="Wine" instance="TeamViewer.exe"]    $Workspace_TV
 
-        # assign      [class="VirtualBox"]                        $Workspace_VM
+        assign      [class="VirtualBox"]                        $Workspace_VM
 
         # for_window  [workspace="$Workspace_6"]                  move workspace to output $monitor_extra
         # for_window  [workspace="$Workspace_7"]                  move workspace to output $monitor_extra
