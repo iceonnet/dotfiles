@@ -1,0 +1,23 @@
+[global_config]
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  title_hide_sizetext = True
+  title_inactive_bg_color = "#1c1f26"
+  title_inactive_fg_color = "#c0c5ce"
+  title_receive_bg_color = "#1c1f26"
+  title_receive_fg_color = "#a3be8c"
+  title_transmit_bg_color = "#1c1f26"
+  title_transmit_fg_color = "#c0c5ce"
+  scrollbar_position = "disabled"
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    scrollback_lines = 10000
