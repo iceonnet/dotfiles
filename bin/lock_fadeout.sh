@@ -49,6 +49,7 @@ while [[ $(ps -A | grep i3lock | wc -l) < 1 ]]; do # Keeps the script busy while
 	sleep 1
 done
 
+redshift &
 while :; do
 	if [[ $(ps -A | grep i3lock | wc -l) < 1 ]]; then
 		for line in $DISPLAYS; do
@@ -59,6 +60,5 @@ while :; do
 	fi
 	sleep 0.25
 done
-redshift &
 
 exit 0
