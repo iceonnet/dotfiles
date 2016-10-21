@@ -7,12 +7,12 @@
   title_receive_fg_color = "#a3be8c"
   title_transmit_bg_color = "#1c1f26"
   title_transmit_fg_color = "#c0c5ce"
-  scrollbar_position = "disabled"
 [keybindings]
 [layouts]
   [[default]]
     [[[child1]]]
       parent = window0
+      profile = default
       type = Terminal
     [[[window0]]]
       parent = ""
@@ -20,4 +20,7 @@
 [plugins]
 [profiles]
   [[default]]
+    background_color = "#2b303b"
+    background_darkness = 0.47
+    background_image = None
     scrollback_lines = 10000

@@ -18,14 +18,14 @@
         set $urgent             #ff0000
 
     # Font
-        set $fontsize 8
+        set $fontsize 10
 
     # Mod key (Windows/Super)
         set $mod Mod4
 
     # Monitors (found with xrandr)
         set $monitor_main       DP-0
-        #set $monitor_extra      HDMI-0
+        #set $monitor_extra     HDMI-0
         set $monitor_extra      DVI-D-0
 
     # Pulse Auto sink (get sink with pactl list sinks)
@@ -112,7 +112,10 @@
             bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
         # dmenu
-            bindsym $mod+d exec --no-startup-id xrdb ~/.Xresources; exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -i -p "run:"' # requires rofi
+            bindsym $mod+d exec --no-startup-id xrdb ~/.Xresources; exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -fuzzy -dmenu -i -p ""' # requires rofi
+            bindsym $mod+Shift+w exec --no-startup-id xrdb ~/.Xresources; exec --no-startup-id rofi -show window
+            bindsym $mod+Shift+d exec --no-startup-id xrdb ~/.Xresources; exec ~/Sublime_Projects/Ideas/custom_rofi/main_menu.sh
+
 
     # Floating windows
         # move floating windows (Mod+Mouse)
@@ -153,7 +156,7 @@
             bindsym $mod+Shift+Down  move down
 
         # bindsym $mod+c floating disable; floating enable; resize set 1120 1061; move right 400
-        bindsym $mod+Shift+c floating disable; floating enable; resize set 1620 1020; move position center
+        bindsym $mod+Shift+c floating disable; floating enable; resize set 1920 1080; move position center
         bindsym $mod+c move position center
 
     # Modes
@@ -165,9 +168,9 @@
 
     # Monitor Tweaking
         # Main only
-            bindsym $mod+F12 exec xrandr --output $monitor_extra --off
+            bindsym $mod+F11 exec xrandr --output $monitor_extra --off
         # Both
-            bindsym $mod+F11 exec "xrandr --output $monitor_main --auto; xrandr --output $monitor_extra --right-of $monitor_main --auto;"
+            bindsym $mod+F12 exec "xrandr --output $monitor_main --auto; xrandr --output $monitor_extra --right-of $monitor_main --auto;"
 
     # Other
         # Exit i3 (logs you out of your X session)
@@ -208,12 +211,12 @@
             bindsym $mod+2                  workspace $Workspace_2;         move workspace to output $monitor_main;
             bindsym $mod+3                  workspace $Workspace_3;         move workspace to output $monitor_main;
             bindsym $mod+4                  workspace $Workspace_4;         move workspace to output $monitor_main;
-            bindsym $mod+5                  workspace $Workspace_5;         move workspace to output $monitor_main;
+            bindsym $mod+5                  workspace $Workspace_5;         move workspace to output $monitor_main;     layout tabbed
             bindsym $mod+6                  workspace $Workspace_6;         move workspace to output $monitor_extra;
             bindsym $mod+7                  workspace $Workspace_7;         move workspace to output $monitor_extra;
             bindsym $mod+8                  workspace $Workspace_8;         move workspace to output $monitor_extra;
             bindsym $mod+9                  workspace $Workspace_9;         move workspace to output $monitor_extra;
-            bindsym $mod+0                  workspace $Workspace_VM;        move workspace to output $monitor_extra;    layout tabbed
+            bindsym $mod+0                  workspace $Workspace_VM;                                                    layout tabbed
             bindsym $mod+plus               workspace $Workspace_TV;        move workspace to output $monitor_extra;
 
         # Move focused container to workspace
@@ -253,14 +256,15 @@
         }
 
     # System shutdown menu
-        set $mode_system (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+        set $mode_system (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown, (Ctrl+Shift+x) exit
         mode "$mode_system" {
-            bindsym l       exec --no-startup-id i3exit lock,      mode "default"
-            bindsym e       exec --no-startup-id i3exit logout,    mode "default"
-            bindsym s       exec --no-startup-id i3exit suspend,   mode "default"
-            bindsym h       exec --no-startup-id i3exit hibernate, mode "default"
-            bindsym r       exec --no-startup-id i3exit reboot,    mode "default"
-            bindsym Shift+s exec --no-startup-id i3exit shutdown,  mode "default"
+            bindsym l             exec --no-startup-id i3exit lock,       mode "default"
+            bindsym e             exec --no-startup-id i3exit logout,     mode "default"
+            bindsym s             exec --no-startup-id i3exit suspend,    mode "default"
+            bindsym h             exec --no-startup-id i3exit hibernate,  mode "default"
+            bindsym r             exec --no-startup-id i3exit reboot,     mode "default"
+            bindsym Shift+s       exec --no-startup-id i3exit shutdown,   mode "default"
+            bindsym Ctrl+Shift+x  exec --no-startup-id i3-msg exit,       mode "default"
 
             bindsym Escape  mode "default"
         }
@@ -277,7 +281,6 @@
         assign      [class="jetbrains-phpstorm"]                $Workspace_3
 
         assign      [class="Steam"]                             $Workspace_5
-        for_window  [workspace="$Workspace_5"]                  floating enable
 
         assign      [class="Mumble"]                            $Workspace_9
 
@@ -291,3 +294,10 @@
         # for_window  [workspace="$Workspace_9"]                  move workspace to output $monitor_extra
         # for_window  [workspace="$Workspace_VM"]                 move workspace to output $monitor_extra
         # for_window  [workspace="$Workspace_TV"]                 move workspace to output $monitor_extra
+        
+
+
+
+
+        # for_window  [workspace="$Workspace_3"]                  floating enable
+        # for_window  [workspace="$Workspace_5"]                  floating enable
