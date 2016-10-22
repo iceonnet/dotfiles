@@ -1,15 +1,25 @@
-rofi.modi:                           window,run,ssh
-rofi.opacity:                        100
-rofi.width:                          50
-rofi.lines:                          15
+rofi.fg:                             #c0c5ce
+rofi.bg:                             #2b303b
+rofi.bgalt:                          #2b303b
+rofi.hlfg:                           #d9dfe9
+rofi.hlbg:                           #373c46
+rofi.bc:                             #1c1f26
+rofi.width:                          1000
+rofi.opacity:                        90
+rofi.padding:                        5
+rofi.location:                       2
+rofi.fuzzy:                          false
+rofi.font:                           mono 15
 rofi.columns:                        1
-rofi.font:                           mono 12
-rofi.fg:                             #002B36
-rofi.bg:                             #FDF6E3
+rofi.lines:                          10
 rofi.color-enabled:                  false
-rofi.color-normal:                   #fdf6e3,#002b36,#eee8d5,#586e75,#eee8d5
-rofi.color-urgent:                   #fdf6e3,#dc322f,#eee8d5,#dc322f,#fdf6e3
-rofi.color-active:                   #fdf6e3,#268bd2,#eee8d5,#268bd2,#fdf6e3
+
+
+
+rofi.modi:                           window,run,ssh
+rofi.color-normal:                   #fdf6e3,#002b36,#EEE8D5,#586e75,#EEE8D5
+rofi.color-urgent:                   #fdf6e3,#dc322f,#EEE8D5,#dc322f,#fdf6e3
+rofi.color-active:                   #fdf6e3,#268bd2,#EEE8D5,#268bd2,#fdf6e3
 rofi.color-window:                   #fdf6e3,#002b36
 rofi.fg-active:                      #268BD2
 rofi.fg-urgent:                      #DC322F
@@ -19,13 +29,7 @@ rofi.bg-active:                      #FDF6E3
 rofi.bg-urgent:                      #FDF6E3
 rofi.hlbg-active:                    #268BD2
 rofi.hlbg-urgent:                    #DC322F
-rofi.bgalt:                          #FDF6E3
-rofi.hlfg:                           #EEE8D5
-rofi.hlbg:                           #586E75
-rofi.bc:                             #002B36
 rofi.bw:                             1
-rofi.location:                       0
-rofi.padding:                        5
 rofi.yoffset:                        0
 rofi.xoffset:                        0
 rofi.fixed-num-lines:                false
@@ -44,7 +48,6 @@ rofi.eh:                             1
 rofi.auto-select:                    false
 rofi.parse-hosts:                    false
 rofi.combi-modi:                     window,run
-rofi.fuzzy:                          true
 rofi.pid:                            /run/user/1000/rofi.pid
 rofi.kb-primary-paste:               Control+Shift+v,Shift+Insert
 rofi.kb-secondary-paste:             Control+v,Insert
@@ -89,3 +92,4 @@ rofi.kb-cancel:                      Escape
 rofi.key-window:                     
 rofi.key-run:                        
 rofi.key-ssh:                        
+URxvt.font: xft:7x13:size=10
