@@ -108,6 +108,7 @@ clear
 
 
 # Copy configs
+    git clone https://github.com/iceonnet/dotfiles.git
 	cp dunst $USER_HOME_PATH/.config/
 	cp i3 $USER_HOME_PATH/.i3
 	cp terminator $USER_HOME_PATH/.config/
