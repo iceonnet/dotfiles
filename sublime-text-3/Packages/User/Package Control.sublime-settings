@@ -1,0 +1,22 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Compare Side-By-Side",
+		"CSS3",
+		"Dockerfile Syntax Highlighting",
+		"GitDiffHelper",
+		"GitHub Flavored Markdown Preview",
+		"GitStatus",
+		"i3 wm",
+		"Package Control",
+		"Processing",
+		"Splunk Syntax",
+		"Terminal",
+		"Theme - Spacegray",
+		"Virtualenv"
+	]
+}
