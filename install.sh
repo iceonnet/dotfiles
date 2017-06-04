@@ -25,7 +25,6 @@ echo "Log of restoration" > $USER_HOME_PATH/restore.log
 echo "
 This will install the following packages:
   ${PACKAGES[@]}
-
 This will also do the following:
 - Changes Alt move to Super(Win) move
 - Disable Media autorun
@@ -35,60 +34,47 @@ clear
 
 
 # PPA lists
-    echo "[Apt] Adding PPAs"
+    echo "[Apt] Adding PPAs" >> $USER_HOME_PATH/restore.log
     sleep 2
     add-apt-repository --yes ppa:webupd8team/sublime-text-3
     add-apt-repository --yes ppa:graphics-drivers/ppa  # Added due to Nvidia 1080
-    add-apt-repository --yes ppa:webupd8team/java -s
+    # add-apt-repository --yes ppa:webupd8team/java -s
 
 # Update APT
-    echo "[Apt] upgdate & upgrade"
+    echo "[Apt] upgdate & upgrade" >> $USER_HOME_PATH/restore.log
     sleep 2
     apt-get update
     apt-get upgrade -y
     apt-get install -f -y
 
 # Install packages
-    echo "[Apt] installing Packages"
+    echo "[Apt] installing Packages" >> $USER_HOME_PATH/restore.log
     sleep 2
 
     for PACKAGE in ${PACKAGES[@]}; do
         echo "" >> $USER_HOME_PATH/restore.log
         echo "[apt-get] $PACKAGE" >> $USER_HOME_PATH/restore.log
-        apt-get install -y $PACKAGE 2>> $USER_HOME_PATH/restore.log && echo "OK" >> $USER_HOME_PATH/restore.log
+        (apt-get install -y $PACKAGE 2>> $USER_HOME_PATH/restore.log && echo "OK" >> $USER_HOME_PATH/restore.log) || echo "Fail" >> $USER_HOME_PATH/restore.log
     done
 
     apt-get install -f -y
 
 # pip
+    echo "[PIP] Upgrade and install autoremove" >> $USER_HOME_PATH/restore.log
     pip install --upgrade pip
     pip install pip-autoremove
 
 
-
-# Configuration Changes
-    echo "[Grub] Changing to console boot"
-    sleep 2
-    # Setup grub for console boot
-        cp /etc/default/grub /etc/default/grub.orig
-
-        sed 's/^GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/#GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/g
-            s/^GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="text"/g
-            s/^#GRUB_TERMINAL=console/GRUB_TERMINAL=console/g' /etc/default/grub.orig > /etc/default/grub
-        update-grub
-        systemctl set-default multi-user.target
-
-
 # Install "loose" packages
-    echo "[dpkg] Installing loose packages"
+    echo "[dpkg] Installing loose packages" >> $USER_HOME_PATH/restore.log
     sleep 2
     cd /tmp/
 
     # Steam
-    wget https://steamcdn-a.akamaihd.net/client/installer/steam.deb && dpkg -i steam.deb
+    wget https://steamcdn-a.akamaihd.net/client/installer/steam.deb && dpkg -i steam.deb && echo "Steam OK" >> $USER_HOME_PATH/restore.log
 
     # Chrome
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && echo "Chrome OK" >> $USER_HOME_PATH/restore.log
     dpkg -i google-chrome-stable_current_amd64.deb
 
     # Software
@@ -104,11 +90,18 @@ clear
 
 # Fetch from GitHub
     # Oh My Zsh
+    echo "Installing oh-my-zsh" >> $USER_HOME_PATH/restore.log
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 
+# Sublime Package Manager
+    mkdir -p $USER_HOME_PATH/.config/sublime-text-3/Installed\ Packages
+    wget -O $USER_HOME_PATH/.config/sublime-text-3/Installed\ Packages/Package\ Control.sublime-package https://packagecontrol.io/Package%20Control.sublime-package
+
+
 # Copy configs
-    git clone https://github.com/iceonnet/dotfiles.git
+    echo "Fetching dotfiles" >> $USER_HOME_PATH/restore.log
+    git clone https://github.com/husjon/dotfiles.git
 	cp dunst $USER_HOME_PATH/.config/
 	cp i3 $USER_HOME_PATH/.i3
 	cp terminator $USER_HOME_PATH/.config/
@@ -118,7 +111,7 @@ clear
 
 
 # Fonts
-    echo "[font] installing fonts"
+    echo "[font] installing fonts" >> $USER_HOME_PATH/restore.log
     sleep 2
     mkdir $USER_HOME_PATH/.fonts
     wget https://github.com/FortAwesome/Font-Awesome/raw/master/fonts/fontawesome-webfont.ttf -o $_/fontawesome-webfont.ttf
@@ -126,7 +119,7 @@ clear
 
 
 # Tweaks
-    echo "[Tweaks] Making minor tweaks."
+    echo "[Tweaks] Making minor tweaks." >> $USER_HOME_PATH/restore.log
     sleep 2
     su $SUDO_USER bash -c 'gsettings set org.gnome.desktop.media-handling autorun-never true'                   # Disables autorun of USB-disks and CD/DVD when mounted.
     su $SUDO_USER bash -c 'gsettings set org.gnome.nautilus.preferences executable-text-activation ask'         # ask to run / display executable text files (f.ex .python, .sh)
@@ -146,4 +139,4 @@ clear
     echo "Computer needs to be rebooted for the NVidia drivers to take effect"
     echo "Press CTRL+C to reboot later or "
     waitForInput
-    reboot
+reboot
