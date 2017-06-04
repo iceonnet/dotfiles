@@ -16,7 +16,7 @@ USER_HOME_PATH=/home/$SUDO_USER
 SOFTWARE_PATH=$USER_HOME_PATH/Software
 DIST_CODENAME=$(awk -F'CODENAME=' '{ print $2 }' /etc/lsb-release | tr -d '[[:space:]]')
 
-PACKAGES=(alacarte curl feh git gparted htop i3 i3blocks nvidia-367 nvidia-settings oracle-java8-installer playonlinux python-dev python-pip redshift screenfetch sensord sublime-text-installer terminator vim xautolock zsh)
+PACKAGES=(alacarte curl feh git gparted htop i3 i3blocks nvidia-367 nvidia-settings oracle-java8-installer playonlinux python-dev python-pip redshift rofi screenfetch sensord sublime-text-installer terminator vim xautolock zsh)
 
 
 echo "Log of restoration" > $USER_HOME_PATH/restore.log
