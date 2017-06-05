@@ -16,7 +16,7 @@ USER_HOME_PATH=/home/$SUDO_USER
 SOFTWARE_PATH=$USER_HOME_PATH/Software
 DIST_CODENAME=$(awk -F'CODENAME=' '{ print $2 }' /etc/lsb-release | tr -d '[[:space:]]')
 
-PACKAGES=(alacarte compton curl feh git gparted htop i3 i3blocks nvidia-367 nvidia-settings oracle-java8-installer playonlinux python-dev python-pip redshift rofi screenfetch sensord sublime-text-installer terminator vim xautolock zsh)
+PACKAGES=(alacarte compton curl feh git gparted htop i3 i3blocks nvidia-367 nvidia-settings oracle-java8-installer playonlinux python-dev python-pip redshift rofi screenfetch sensord spotify-client sublime-text-installer terminator vim xautolock zsh)
 
 
 echo "Log of restoration" > $USER_HOME_PATH/restore.log
@@ -40,9 +40,11 @@ clear
     add-apt-repository --yes ppa:graphics-drivers/ppa  # Added due to Nvidia 1080
     apt-add-repository 'https://dl.winehq.org/wine-builds/ubuntu/'  # Wine staging
     # add-apt-repository --yes ppa:webupd8team/java -s
+    echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 
 # Repo Keys
-wget -nc https://repos.wine-staging.com/wine/Release.key -O /tmp/Release_Wine.key && apt-key add /tmp/Release_Wine.key
+    wget -nc https://repos.wine-staging.com/wine/Release.key -O /tmp/Release_Wine.key && apt-key add /tmp/Release_Wine.key
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886  # Spotify
 
 # Update APT
     echo "[Apt] upgdate & upgrade" >> $USER_HOME_PATH/restore.log
