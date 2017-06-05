@@ -35,3 +35,5 @@ xset s off off -dpms
 # killall TeamViewer.exe
 # ~/bin/tv_start.sh   && notify-send "[tv_start] started"
 # ~/bin/tv_monitor.sh && notify-send "[tv_monitor] started"
+
+gnome-settings-daemon &

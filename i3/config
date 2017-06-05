@@ -197,8 +197,8 @@
             bindsym $mod+Ctrl+Shift+r restart
 
         # Lock workstation
-            bindsym $mod+l       exec xautolock -locknow
-            bindsym $mod+Shift+l exec xautolock -locknow
+            bindsym $mod+l       exec lock
+            bindsym $mod+Shift+l exec lock
 
         # Kill window
             bindsym --release $mod+button2 kill
