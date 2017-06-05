@@ -67,8 +67,8 @@
     # the top and down respectively.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "300x5-10-30"
-    # geometry = "300x5-10+30"
+    # geometry = "300x5-10-30"
+    geometry = "480x5-50+50"
 
     # Shrink window if it's smaller than the width.  Will be ignored if
     # width is 0.
@@ -112,7 +112,7 @@
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
-    line_height = 0
+    line_height = 4
 
     # The height of the entire notification.  If the height is smaller
     # than the font height and padding combined, it will be raised
@@ -136,7 +136,7 @@
     #  * foreground: use the same color as the foreground;
     #  * frame: use the same color as the frame;
     #  * anything else will be interpreted as a X color.
-    separator_color = frame
+    separator_color = auto
 
     # Print a notification on startup.
     # This is mainly for error detection, since dbus (re-)starts dunst
@@ -175,7 +175,7 @@
     # Redisplay last message(s).
     # On the US keyboard layout "grave" is normally above TAB and left
     # of "1".
-    history = ctrl+grave
+    history = mod4+shift+r
 
     # Context menu.
     context = ctrl+shift+period
@@ -185,7 +185,7 @@
     # Otherwise the "#" and following would be interpreted as a comment.
     background = "#272822"
     foreground = "#ffffff"
-    timeout = 10
+    timeout = 3
 
 [urgency_normal]
     background = "#273d22" # ORG: 272822

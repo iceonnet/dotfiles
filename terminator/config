@@ -1,5 +1,7 @@
 [global_config]
   enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+  inactive_color_offset = 1.0
+  suppress_multiple_term_dialog = True
   title_hide_sizetext = True
   title_inactive_bg_color = "#1c1f26"
   title_inactive_fg_color = "#c0c5ce"
@@ -16,6 +18,8 @@
       type = Terminal
     [[[window0]]]
       parent = ""
+      profile = None
+      size = 1400, 600
       type = Window
 [plugins]
 [profiles]
@@ -23,4 +27,5 @@
     background_color = "#2b303b"
     background_darkness = 0.47
     background_image = None
-    scrollback_lines = 10000
+    font = Sans 13
+    scrollback_lines = 1000000

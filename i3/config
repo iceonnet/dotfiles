@@ -11,6 +11,7 @@
 
     # Colors
         set $background         #2f343f
+        set $background_HL      #8f949f
         set $focused            #fcfff2
         set $focused_inactive   #bfc4cf
         set $indicator          #3f3f3f
@@ -24,15 +25,14 @@
         set $mod Mod4
 
     # Monitors (found with xrandr)
-        set $monitor_main       DP-0
-        #set $monitor_extra     HDMI-0
-        set $monitor_extra      DVI-D-0
+        set $monitor_main       DP-2
+        set $monitor_extra      DP-0
 
     # Pulse Auto sink (get sink with pactl list sinks)
         set $pulse_sink 2
 
     # Screenshot Folder
-        set $screenshot_folder  ~/Pictures/Screenshots
+        set $screenshot_folder  ~/Dropbox/Screenshots/Scrot
 
     # Workspaces
         #   variable            Name
@@ -84,7 +84,7 @@
             separator_symbol " "
             status_command i3blocks -c ~/.i3/i3blocks.conf
             strip_workspace_numbers yes
-            tray_output $monitor_extra
+            tray_output $monitor_main
         }
         # Bindings for i3blocks (Caps/NumLock)
             bindsym --release Caps_Lock exec --no-startup-id pkill -SIGRTMIN+11 i3blocks
@@ -97,6 +97,11 @@
         # Set the size of Window border
             new_window normal 1 px
 
+    # Exec on i3 restart
+        exec_always pkill dunst
+        exec_always --no-startup-id pkill redshift
+        exec_always --no-startup-id sleep 1 && redshift&
+
 
 
 #---------------------------\
@@ -105,16 +110,17 @@
     
     # Note: get keys with xev or xmodmap (-pke)
 
-    bindsym $mod+Shift+T exec --no-startup-id "killall dunst; ~/bin/notifications/temperature.sh"
+    bindsym $mod+Shift+T exec --no-startup-id "~/bin/notifications/temperature.sh"
 
     # Execute
         # Terminal
             bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
         # dmenu
-            bindsym $mod+d exec --no-startup-id xrdb ~/.Xresources; exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -fuzzy -dmenu -i -p ""' # requires rofi
-            bindsym $mod+Shift+w exec --no-startup-id xrdb ~/.Xresources; exec --no-startup-id rofi -show window
+            bindsym $mod+d exec --no-startup-id xrdb ~/.Xresources; exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -matching fuzzy -dmenu -i -p ""' # requires rofi
+            bindsym $mod+Shift+w exec --no-startup-id xrdb ~/.Xresources; exec --no-startup-id rofi -show window -fuzzy
             bindsym $mod+Shift+d exec --no-startup-id xrdb ~/.Xresources; exec ~/Sublime_Projects/Ideas/custom_rofi/main_menu.sh
+            bindsym $mod+Shift+h exec --no-startup-id python Sublime_Projects/blank/test.py fetch
 
 
     # Floating windows
@@ -139,9 +145,10 @@
 
     # Layout
         # Change container layout (stacked, tabbed, toggle split)
-            bindsym $mod+s layout stacking
+            # bindsym $mod+s layout stacking
             bindsym $mod+w layout tabbed
             bindsym $mod+e layout toggle split
+            bindsym $mod+a focus parent
 
         # Toggle tiling / floating
             bindsym $mod+Shift+space floating toggle
@@ -156,7 +163,9 @@
             bindsym $mod+Shift+Down  move down
 
         # bindsym $mod+c floating disable; floating enable; resize set 1120 1061; move right 400
-        bindsym $mod+Shift+c floating disable; floating enable; resize set 1920 1080; move position center
+        bindsym $mod+Shift+c floating disable; floating enable; resize set 1920 1280; move position center
+        bindsym $mod+Ctrl+c floating disable; floating enable; resize set 1322 964; move position center
+        bindsym $mod+Shift+Ctrl+c floating disable; floating enable; resize set 459 883; move position center
         bindsym $mod+c move position center
 
     # Modes
@@ -168,9 +177,11 @@
 
     # Monitor Tweaking
         # Main only
-            bindsym $mod+F11 exec xrandr --output $monitor_extra --off
+            bindsym $mod+Shift+F11 exec xrandr --output $monitor_main --off
+            bindsym $mod+F11 exec "xrandr --output $monitor_main --auto --primary; xrandr --output $monitor_main --left-of $monitor_extra;"
         # Both
-            bindsym $mod+F12 exec "xrandr --output $monitor_main --auto; xrandr --output $monitor_extra --right-of $monitor_main --auto;"
+            bindsym $mod+Shift+F12  exec xrandr --output $monitor_extra --off
+            bindsym $mod+F12 exec "xrandr --output $monitor_extra --mode 2560x1440 --rate 144; xrandr --output $monitor_extra --right-of $monitor_main --primary;"
 
     # Other
         # Exit i3 (logs you out of your X session)
@@ -183,27 +194,36 @@
             bindsym $mod+v split v
 
         # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-            bindsym $mod+Shift+r restart
+            bindsym $mod+Ctrl+Shift+r restart
 
         # Lock workstation
-            bindsym $mod+l       exec xautolock -locknow
-            bindsym $mod+Shift+l exec xautolock -locknow
+            bindsym $mod+l       exec lock
+            bindsym $mod+Shift+l exec lock
 
         # Kill window
             bindsym --release $mod+button2 kill
 
     # Screenshot
-        bindsym Print                       exec scrot -m -e 'mv $f $screenshot_folder'
-        bindsym $mod+Print --release        exec scrot -s -e 'mv $f $screenshot_folder'
-        bindsym $mod+Shift+Print --release  exec scrot -u -e 'mv $f $screenshot_folder'
+        bindsym Print                       exec scrot -m -e 'mv $f $screenshot_folder/Full'    # full screen capture (all monitors)
+        bindsym $mod+Shift+S --release      exec scrot -s -e 'mv $f $screenshot_folder/Region'  # region capture (simulating Evernote)
+        bindsym $mod+Shift+Print --release  exec scrot -u -e 'mv $f $screenshot_folder/Window'  # active window capture
 
     # Volume controls for Pulse
         bindsym XF86AudioRaiseVolume        exec pactl set-sink-volume $pulse_sink +1%;    exec pkill -SIGRTMIN+10 i3blocks
         bindsym XF86AudioLowerVolume        exec pactl set-sink-volume $pulse_sink -1%;    exec pkill -SIGRTMIN+10 i3blocks
         bindsym XF86AudioMute               exec pactl set-sink-mute   $pulse_sink toggle; exec pkill -SIGRTMIN+10 i3blocks
 
+    # Media keys
+        bindsym XF86AudioPlay exec playerctl play-pause
+        bindsym XF86AudioStop exec playerctl stop
+        bindsym XF86AudioNext exec playerctl next
+        bindsym XF86AudioPrev exec playerctl previous
+
         # used to update Volume block
             exec_always sleep 0.1 && pkill -SIGRTMIN+10 i3blocks
+
+    # Kill window
+        bindsym --whole-window $mod+Ctrl+Shift+button1 kill
 
     # Workspaces
         # Switch to workspace
@@ -211,11 +231,12 @@
             bindsym $mod+2                  workspace $Workspace_2;         move workspace to output $monitor_main;
             bindsym $mod+3                  workspace $Workspace_3;         move workspace to output $monitor_main;
             bindsym $mod+4                  workspace $Workspace_4;         move workspace to output $monitor_main;
-            bindsym $mod+5                  workspace $Workspace_5;         move workspace to output $monitor_main;     layout tabbed
-            bindsym $mod+6                  workspace $Workspace_6;         move workspace to output $monitor_extra;
+            bindsym $mod+5                  workspace $Workspace_5;                                                     exec --no-startup-id ~/bin/start_Steam.sh&
+            bindsym $mod+6                  workspace $Workspace_6;
+            #append_layout /home/iceonnet/i3wm-ws6.json;
             bindsym $mod+7                  workspace $Workspace_7;         move workspace to output $monitor_extra;
             bindsym $mod+8                  workspace $Workspace_8;         move workspace to output $monitor_extra;
-            bindsym $mod+9                  workspace $Workspace_9;         move workspace to output $monitor_extra;
+            bindsym $mod+9                  workspace $Workspace_9;         move workspace to output $monitor_extra;    exec --no-startup-id ~/bin/start_Discord.sh&
             bindsym $mod+0                  workspace $Workspace_VM;                                                    layout tabbed
             bindsym $mod+plus               workspace $Workspace_TV;        move workspace to output $monitor_extra;
 
@@ -256,11 +277,12 @@
         }
 
     # System shutdown menu
-        set $mode_system (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown, (Ctrl+Shift+x) exit
+        #set $mode_system (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown, (Ctrl+Shift+x) exit
+        set $mode_system (l) lock, (e) logout, (h) hibernate, (r) reboot, (Shift+s) shutdown, (Ctrl+Shift+x) exit
         mode "$mode_system" {
             bindsym l             exec --no-startup-id i3exit lock,       mode "default"
             bindsym e             exec --no-startup-id i3exit logout,     mode "default"
-            bindsym s             exec --no-startup-id i3exit suspend,    mode "default"
+            #bindsym s             exec --no-startup-id i3exit suspend,    mode "default"
             bindsym h             exec --no-startup-id i3exit hibernate,  mode "default"
             bindsym r             exec --no-startup-id i3exit reboot,     mode "default"
             bindsym Shift+s       exec --no-startup-id i3exit shutdown,   mode "default"
@@ -277,12 +299,13 @@
     # Force move (Get class with f.ex: xprop | grep WM_CLASS)
         assign      [class="Sublime_text"]                      $Workspace_3
 
-        assign      [class="jetbrains-pycharm"]                 $Workspace_3
-        assign      [class="jetbrains-phpstorm"]                $Workspace_3
+        assign      [class="jetbrains-pycharm"]                 $Workspace_4
+        assign      [class="jetbrains-phpstorm"]                $Workspace_4
 
         assign      [class="Steam"]                             $Workspace_5
 
         assign      [class="Mumble"]                            $Workspace_9
+        assign      [class="discord"]                           $Workspace_9
 
         assign      [class="Wine" instance="TeamViewer.exe"]    $Workspace_TV
 
@@ -301,3 +324,13 @@
 
         # for_window  [workspace="$Workspace_3"]                  floating enable
         # for_window  [workspace="$Workspace_5"]                  floating enable
+         for_window  [workspace="$Workspace_2"]                  floating enable
+        for_window [class="^.*"] border pixel 1
+        for_window [class="Steam"] border normal
+        for_window [title=".*?sketch.*"] floating enable
+        for_window [class="Minecraft.*"] floating enable
+        for_window [class="com-intellij.*"] floating enable
+
+        for_window [class="^Wine$" instance="^PathOfExile.exe$"] floating enable, move container to workspace 10
+        #for_window [class="^Wine$" instance="^PathOfExile.exe$" title="^Path of Exile$"] floating enable, move container to workspace 10, border none, move absolute position center
+        assign      [class="^Wine$" instance="^PathOfExile.exe$"]    $Workspace_2

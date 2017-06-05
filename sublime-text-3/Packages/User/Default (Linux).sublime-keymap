@@ -1,0 +1,9 @@
+[
+    { "keys": ["ctrl+'"], "command": "toggle_comment", "args": { "block": false } },
+    { "keys": ["alt+shift+up"], "command": "select_lines", "args": {"forward": false} },
+    { "keys": ["alt+shift+down"], "command": "select_lines", "args": {"forward": true} },
+    { "keys": ["ctrl+b"], "command": "toggle_side_bar" },
+
+    { "keys": ["ctrl+shift+alt+t"], "command": "open_terminal" },
+    { "keys": ["ctrl+alt+t"], "command": "open_terminal_project_folder" }
+]
