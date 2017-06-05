@@ -16,7 +16,7 @@ USER_HOME_PATH=/home/$SUDO_USER
 SOFTWARE_PATH=$USER_HOME_PATH/Software
 DIST_CODENAME=$(awk -F'CODENAME=' '{ print $2 }' /etc/lsb-release | tr -d '[[:space:]]')
 
-PACKAGES=(alacarte curl feh git gparted htop i3 i3blocks nvidia-367 nvidia-settings oracle-java8-installer playonlinux python-dev python-pip redshift rofi screenfetch sensord sublime-text-installer terminator vim xautolock zsh)
+PACKAGES=(alacarte compton curl feh git gparted htop i3 i3blocks nvidia-367 nvidia-settings oracle-java8-installer playonlinux python-dev python-pip redshift rofi screenfetch sensord sublime-text-installer terminator vim xautolock zsh)
 
 
 echo "Log of restoration" > $USER_HOME_PATH/restore.log
@@ -38,7 +38,11 @@ clear
     sleep 2
     add-apt-repository --yes ppa:webupd8team/sublime-text-3
     add-apt-repository --yes ppa:graphics-drivers/ppa  # Added due to Nvidia 1080
+    apt-add-repository 'https://dl.winehq.org/wine-builds/ubuntu/'  # Wine staging
     # add-apt-repository --yes ppa:webupd8team/java -s
+
+# Repo Keys
+wget -nc https://repos.wine-staging.com/wine/Release.key -O /tmp/Release_Wine.key && apt-key add /tmp/Release_Wine.key
 
 # Update APT
     echo "[Apt] upgdate & upgrade" >> $USER_HOME_PATH/restore.log
@@ -57,6 +61,9 @@ clear
         (apt-get install -y $PACKAGE 2>> $USER_HOME_PATH/restore.log && echo "OK" >> $USER_HOME_PATH/restore.log) || echo "Fail" >> $USER_HOME_PATH/restore.log
     done
 
+    # Wine Staging
+    apt-get install --install-recommends winehq-staging
+    
     apt-get install -f -y
 
 # pip
@@ -88,6 +95,7 @@ clear
         chown -R $SUDO_USER:$SUDO_USER $SOFTWARE_PATH
 
 
+
 # Fetch from GitHub
     # Oh My Zsh
     echo "Installing oh-my-zsh" >> $USER_HOME_PATH/restore.log
@@ -116,6 +124,11 @@ clear
     mkdir $USER_HOME_PATH/.fonts
     wget https://github.com/FortAwesome/Font-Awesome/raw/master/fonts/fontawesome-webfont.ttf -o /usr/local/share/fonts/fontawesome-webfont.ttf
     fc-cache -f -v
+
+
+# Theming
+    wget wget http://download.opensuse.org/repositories/home:/Horst3180/xUbuntu_16.04/all/arc-theme_1488477732.766ae1a-0_all.deb -O /tmp/arc-theme.deb
+    dpkg -i /tmp/arc-theme.deb
 
 
 # Tweaks
