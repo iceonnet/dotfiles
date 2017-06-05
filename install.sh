@@ -122,7 +122,7 @@ wget -nc https://repos.wine-staging.com/wine/Release.key -O /tmp/Release_Wine.ke
     echo "[font] installing fonts" >> $USER_HOME_PATH/restore.log
     sleep 2
     mkdir $USER_HOME_PATH/.fonts
-    wget https://github.com/FortAwesome/Font-Awesome/raw/master/fonts/fontawesome-webfont.ttf -o /usr/local/share/fonts/fontawesome-webfont.ttf
+    wget https://github.com/FortAwesome/Font-Awesome/raw/master/fonts/fontawesome-webfont.ttf -O /usr/local/share/fonts/fontawesome-webfont.ttf
     fc-cache -f -v
 
 
