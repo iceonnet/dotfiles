@@ -1,11 +1,19 @@
-// working
-rofi.modi:                          window,run,ssh
+# Ubuntu 16.04LTS Specific
+rofi.fg:                             #c0c5ce
+rofi.bg:                             #2b303b
+rofi.bgalt:                          #2b303b
+rofi.hlfg:                           #d9dfe9
+rofi.hlbg:                           #373c46
+rofi.bc:                             #1c1f26
+
+# Ubuntu 17.04
 rofi.color-normal:                  #232830,#a3a8af,#232830,#a3a8af,#232830
 rofi.color-urgent:                  #232830,#dc322f,#232830,#dc322f,#232830
 rofi.color-active:                  #232830,#268bd2,#232830,#268bd2,#232830
 rofi.color-window:                  #232830,#232830
 
 
+rofi.modi:                          window,run,ssh
 rofi.width:                         1024
 rofi.font:                          mono 20
 rofi.columns:                       1
@@ -13,3 +21,4 @@ rofi.lines:                         10
 rofi.location:                      0
 rofi.padding:                       0
 rofi.fullscreen:                    false
+rofi.fuzzy:                         true
