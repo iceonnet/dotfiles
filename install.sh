@@ -83,8 +83,10 @@ clear
     wget https://steamcdn-a.akamaihd.net/client/installer/steam.deb && dpkg -i steam.deb && echo "Steam OK" >> $USER_HOME_PATH/restore.log
 
     # Chrome
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && echo "Chrome OK" >> $USER_HOME_PATH/restore.log
-    dpkg -i google-chrome-stable_current_amd64.deb
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && dpkg -i google-chrome-stable_current_amd64.deb && echo "Chrome OK" >> $USER_HOME_PATH/restore.log
+    
+    # playerctl
+    wget https://github.com/acrisci/playerctl/releases/download/v0.5.0/playerctl-0.5.0_amd64.deb && dpkg -i playerctl-0.5.0_amd64.deb && echo "playerctl OK" >> $USER_HOME_PATH/restore.log
 
     # Software
         mkdir $SOFTWARE_PATH && cd $_
