@@ -16,7 +16,8 @@ USER_HOME_PATH=/home/$SUDO_USER
 SOFTWARE_PATH=$USER_HOME_PATH/Software
 DIST_CODENAME=$(awk -F'CODENAME=' '{ print $2 }' /etc/lsb-release | tr -d '[[:space:]]')
 
-PACKAGES=(alacarte compton curl feh git gparted htop i3 i3blocks nvidia-367 nvidia-settings oracle-java8-installer playonlinux python-dev python-pip redshift rofi screenfetch sensord spotify-client sublime-text-installer terminator vim xautolock zsh)
+PACKAGES=(alacarte compton curl feh git gparted htop i3 i3blocks nvidia-367 nvidia-settings oracle-java8-installer playonlinux python-dev python-pip redshift rofi screenfetch sensord spotify-client sublime-text-installer terminator vim xautolock zsh
+          libxcb-ewmh-dev)
 
 
 echo "Log of restoration" > $USER_HOME_PATH/restore.log
@@ -97,6 +98,10 @@ clear
             curl http://downloads.arduino.cc/arduino-1.6.10-linux64.tar.xz | tar -xJ
 
         chown -R $SUDO_USER:$SUDO_USER $SOFTWARE_PATH
+    
+    # rofi v1.3.1
+    wget https://github.com/DaveDavenport/rofi/releases/download/1.3.1/rofi-1.3.1.tar.gz
+    tar xfz rofi-1.3.1.tar.gz && cd rofi-1.3.1 && ./configure && make && make install
 
 
 
