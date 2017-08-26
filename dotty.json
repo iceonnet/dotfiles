@@ -7,17 +7,15 @@
         "~/.oh-my-zsh/custom/themes"
     ],
     "link": {
+        "/home/husjon/Dropbox/sublime-text-3/Projects": "~/.config/sublime-text-3/Packages/User/Projects",
         "dunst/dunstrc": "~/.config/dunst/dunstrc",
         "i3": "~/.i3",
-        "terminator/config": "~/.config/terminator/config",
-        "Xresources": "~/.Xresources",
-        "zshrc": "~/.zshrc",
-        
+        "oh-my-zsh/custom/themes/husjon.zsh-theme": "~/.oh-my-zsh/custom/themes/husjon.zsh-theme",
         "sublime-text-3/Packages/User/Default (Linux).sublime-keymap": "~/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
         "sublime-text-3/Packages/User/Package Control.sublime-settings": "~/.config/sublime-text-3/Packages/User/Package Control.sublime-settings",
         "sublime-text-3/Packages/User/Preferences.sublime-settings": "~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
-
-        "oh-my-zsh/custom/themes/husjon.zsh-theme": "~/.oh-my-zsh/custom/themes/husjon.zsh-theme"
+        "terminator/config": "~/.config/terminator/config",
+        "Xresources": "~/.Xresources",
+        "zshrc": "~/.zshrc"
     }
 }
-

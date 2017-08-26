@@ -5,5 +5,13 @@
     { "keys": ["ctrl+b"], "command": "toggle_side_bar" },
 
     { "keys": ["ctrl+shift+alt+t"], "command": "open_terminal" },
-    { "keys": ["ctrl+alt+t"], "command": "open_terminal_project_folder" }
+    { "keys": ["ctrl+alt+t"], "command": "open_terminal_project_folder" },
+    { "keys": ["ctrl+shift+o"], "command": "prompt_add_folder" },
+    { "keys": ["ctrl+|"], "command": "show_panel", "args": {"panel": "console", "toggle": true} },
+    { "keys": ["super+,"], "command": "edit_settings", "args": {
+        "base_file": "${packages}/Default/Preferences.sublime-settings" }
+    },
+    { "keys": ["super+shift+,"], "command": "edit_settings", "args": {
+        "base_file": "${packages}/Default/Default (Linux).sublime-keymap" }
+    },
 ]

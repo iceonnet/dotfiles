@@ -49,7 +49,7 @@ ZSH_THEME="husjon"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git vagrant)
 
 # User configuration
 
@@ -82,3 +82,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias upgrade="sudo apt update && sudo apt upgrade"
+export WORKON_HOME=$HOME/Virtual_Environments
+export PROJECT_HOME=$HOME/PycharmProjects
+export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
+source /usr/local/bin/virtualenvwrapper_lazy.sh

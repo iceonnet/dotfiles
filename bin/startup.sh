@@ -16,14 +16,14 @@ xset s off off -dpms
     (~/bin/nvidiafanspeed/nvidiafanspeed.sh &) && notify-send -u critical "[nvidiafanspeed] started"
 
 # Compton
-    # compton -D 5 -f --glx-copy-from-front && notify-send "[compton] started"
+    compton -D 5 -f --glx-copy-from-front && notify-send "[compton] started"
 
 # Setup Default audio sink
     pactl set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo &
 
 # Setup monitors
     sleep 5
-    (xrandr --output DP-0 --auto --primary; xrandr --output DVI-D-0 --mode 1920x1080 --right-of DP-0
+    (xrandr --output DP-2 --rate 165 --primary; xrandr --output DP-0 --mode 2560x1440 --right-of DP-2
         ) && notify-send "[xrandr] monitors"
 
 # set background

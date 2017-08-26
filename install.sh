@@ -16,7 +16,8 @@ USER_HOME_PATH=/home/$SUDO_USER
 SOFTWARE_PATH=$USER_HOME_PATH/Software
 DIST_CODENAME=$(awk -F'CODENAME=' '{ print $2 }' /etc/lsb-release | tr -d '[[:space:]]')
 
-PACKAGES=(alacarte compton curl feh git gparted htop i3 i3blocks nvidia-367 nvidia-settings oracle-java8-installer playonlinux python-dev python-pip redshift rofi screenfetch sensord sublime-text-installer terminator vim xautolock zsh)
+PACKAGES=(alacarte compton curl feh git gparted htop i3 i3blocks nvidia-367 nvidia-settings oracle-java8-installer playonlinux python-dev python-pip redshift rofi screenfetch sensord spotify-client sublime-text-installer terminator vim xautolock zsh
+          libxcb-ewmh-dev)
 
 
 echo "Log of restoration" > $USER_HOME_PATH/restore.log
@@ -40,9 +41,11 @@ clear
     add-apt-repository --yes ppa:graphics-drivers/ppa  # Added due to Nvidia 1080
     apt-add-repository 'https://dl.winehq.org/wine-builds/ubuntu/'  # Wine staging
     # add-apt-repository --yes ppa:webupd8team/java -s
+    echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 
 # Repo Keys
-wget -nc https://repos.wine-staging.com/wine/Release.key -O /tmp/Release_Wine.key && apt-key add /tmp/Release_Wine.key
+    wget -nc https://repos.wine-staging.com/wine/Release.key -O /tmp/Release_Wine.key && apt-key add /tmp/Release_Wine.key
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886  # Spotify
 
 # Update APT
     echo "[Apt] upgdate & upgrade" >> $USER_HOME_PATH/restore.log
@@ -81,8 +84,10 @@ wget -nc https://repos.wine-staging.com/wine/Release.key -O /tmp/Release_Wine.ke
     wget https://steamcdn-a.akamaihd.net/client/installer/steam.deb && dpkg -i steam.deb && echo "Steam OK" >> $USER_HOME_PATH/restore.log
 
     # Chrome
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && echo "Chrome OK" >> $USER_HOME_PATH/restore.log
-    dpkg -i google-chrome-stable_current_amd64.deb
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && dpkg -i google-chrome-stable_current_amd64.deb && echo "Chrome OK" >> $USER_HOME_PATH/restore.log
+    
+    # playerctl
+    wget https://github.com/acrisci/playerctl/releases/download/v0.5.0/playerctl-0.5.0_amd64.deb && dpkg -i playerctl-0.5.0_amd64.deb && echo "playerctl OK" >> $USER_HOME_PATH/restore.log
 
     # Software
         mkdir $SOFTWARE_PATH && cd $_
@@ -93,6 +98,10 @@ wget -nc https://repos.wine-staging.com/wine/Release.key -O /tmp/Release_Wine.ke
             curl http://downloads.arduino.cc/arduino-1.6.10-linux64.tar.xz | tar -xJ
 
         chown -R $SUDO_USER:$SUDO_USER $SOFTWARE_PATH
+    
+    # rofi v1.3.1
+    wget https://github.com/DaveDavenport/rofi/releases/download/1.3.1/rofi-1.3.1.tar.gz
+    tar xfz rofi-1.3.1.tar.gz && cd rofi-1.3.1 && ./configure && make && make install
 
 
 
