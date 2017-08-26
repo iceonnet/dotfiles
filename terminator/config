@@ -25,7 +25,8 @@
 [profiles]
   [[default]]
     background_color = "#2b303b"
-    background_darkness = 0.47
+    background_darkness = 0.78
     background_image = None
+    background_type = transparent
     font = Sans 13
     scrollback_lines = 1000000
