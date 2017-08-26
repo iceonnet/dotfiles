@@ -9,5 +9,6 @@
 	"no_column_highlights_line": true,
 	"theme": "Spacegray.sublime-theme",
 	"translate_tabs_to_spaces": false,
-	"trim_trailing_white_space_on_save": true
+	"trim_trailing_white_space_on_save": true,
+	"ensure_newline_at_eof_on_save": true,
 }
