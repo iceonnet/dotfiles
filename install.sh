@@ -16,10 +16,14 @@ source /etc/lsb-release  # Distribution information
 HOME=/home/$SUDO_USER
 SOFTWARE_PATH=$HOME/Software
 
-PACKAGES=(alacarte compton curl dropbox feh git gparted htop
-    i3 i3blocks nvidia-367 nvidia-settings oracle-java8-installer playonlinux
-    python-dev python-pip redshift rofi screenfetch sensord spotify-client
-    sublime-text-installer terminator vim xautolock zsh libxcb-ewmh-dev)
+PACKAGES=(alacarte compton curl dropbox feh git gparted htop i3 i3blocks
+    nvidia-367 nvidia-settings oracle-java8-installer playonlinux python-dev
+    python-pip redshift rofi screenfetch sensord spotify-client
+    sublime-text-installer terminator vim xautolock zsh libxcb-ewmh-dev
+    autoconf libev-dev libpango1.0-dev libstartup-notification0-dev
+    libxcb-cursor-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-randr0-dev
+    libxcb-util0-dev libxcb-xinerama0-dev libxcb-xkb-dev libxcb-xrm-dev
+    libxcb1-dev libxkbcommon-dev libxkbcommon-x11-dev libyajl-dev)
 
 
 echo "Log of restoration" > $HOME/restore.log
@@ -43,6 +47,7 @@ clear
     sleep 2
     add-apt-repository --yes ppa:webupd8team/sublime-text-3
     add-apt-repository --yes ppa:graphics-drivers/ppa  # Added due to Nvidia 1080
+    add-apt-repository ppa:aguignard/ppa  # Added due to i3-gaps
     apt-add-repository 'https://dl.winehq.org/wine-builds/ubuntu/'  # Wine staging
     # add-apt-repository --yes ppa:webupd8team/java -s
     echo deb http://repository.spotify.com stable non-free | \
@@ -122,6 +127,18 @@ clear
     wget https://github.com/DaveDavenport/rofi/releases/download/1.3.1/rofi-1.3.1.tar.gz && \
         tar xfz rofi-1.3.1.tar.gz && cd rofi-1.3.1 && ./configure && \
         make && make install
+
+
+    # i3-gaps
+    git clone https://www.github.com/Airblader/i3 i3-gaps && cd i3-gaps
+    autoreconf --force --install
+    rm -rf build/
+    mkdir -p build && cd build/
+    ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+    make
+    make install
+    cd /tmp
+
 
 
 
