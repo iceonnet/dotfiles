@@ -23,7 +23,8 @@ PACKAGES=(alacarte compton curl dropbox feh git gparted htop i3 i3blocks
     autoconf libev-dev libpango1.0-dev libstartup-notification0-dev
     libxcb-cursor-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-randr0-dev
     libxcb-util0-dev libxcb-xinerama0-dev libxcb-xkb-dev libxcb-xrm-dev
-    libxcb1-dev libxkbcommon-dev libxkbcommon-x11-dev libyajl-dev)
+    libxcb1-dev libxkbcommon-dev libxkbcommon-x11-dev libyajl-dev
+    libc++1)
 
 
 echo "Log of restoration" > $HOME/restore.log
@@ -128,6 +129,9 @@ clear
         tar xfz rofi-1.3.1.tar.gz && cd rofi-1.3.1 && ./configure && \
         make && make install
 
+    # discord
+    wget https://dl.discordapp.net/apps/linux/0.0.2/discord-0.0.2.deb -O discord.deb && \
+        dpkg -i discord.deb
 
     # i3-gaps
     git clone https://www.github.com/Airblader/i3 i3-gaps && cd i3-gaps
