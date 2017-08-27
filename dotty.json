@@ -7,6 +7,7 @@
         "~/.oh-my-zsh/custom/themes"
     ],
     "link": {
+        "bin": "~/bin",
         "/home/husjon/Dropbox/sublime-text-3/Projects": "~/.config/sublime-text-3/Packages/User/Projects",
         "dunst/dunstrc": "~/.config/dunst/dunstrc",
         "i3": "~/.i3",
