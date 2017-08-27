@@ -84,7 +84,10 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias upgrade="sudo apt update && sudo apt upgrade"
+alias :q=exit
+
 export WORKON_HOME=$HOME/Virtual_Environments
 export PROJECT_HOME=$HOME/PycharmProjects
 export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
 source /usr/local/bin/virtualenvwrapper_lazy.sh
+
