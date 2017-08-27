@@ -16,7 +16,7 @@ source /etc/lsb-release  # Distribution information
 HOME=/home/$SUDO_USER
 SOFTWARE_PATH=$HOME/Software
 
-PACKAGES=(alacarte compton curl feh git gparted htop
+PACKAGES=(alacarte compton curl dropbox feh git gparted htop
     i3 i3blocks nvidia-367 nvidia-settings oracle-java8-installer playonlinux
     python-dev python-pip redshift rofi screenfetch sensord spotify-client
     sublime-text-installer terminator vim xautolock zsh libxcb-ewmh-dev)
@@ -47,12 +47,16 @@ clear
     # add-apt-repository --yes ppa:webupd8team/java -s
     echo deb http://repository.spotify.com stable non-free | \
         sudo tee /etc/apt/sources.list.d/spotify.list
+    echo deb http://linux.dropbox.com/ubuntu $DISTRIB_CODENAME main | \
+        sudo tee /etc/apt/sources.list.d/dropbox.list
 
 # Repo Keys
     wget -nc https://repos.wine-staging.com/wine/Release.key \
         -O /tmp/Release_Wine.key && apt-key add /tmp/Release_Wine.key  # Wine
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 \
         --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886  # Spotify
+    apt-key adv --keyserver pgp.mit.edu \
+        --recv-keys 1C61A2656FB57B7E4DE0F4C1FC918B335044912E  # Dropbox
 
 # Update APT
     echo "[Apt] update & upgrade" >> $HOME/restore.log
