@@ -53,10 +53,10 @@ esac
 
 scrot -z "$IMAGE"
 ICON="$SCRIPTPATH/lock.png"
-PARAM=(--textcolor=00000000 --insidecolor=0000001c --ringcolor=0000003e \
-        --linecolor=00000000 --keyhlcolor=ffffff80 --ringvercolor=ffffff00 \
-        --separatorcolor=22222260 --insidevercolor=ffffff1c \
-        --ringwrongcolor=ffffff55 --insidewrongcolor=ffffff1c)
+PARAM=(--textcolor=ffffff00 --insidecolor=ffffff1c --ringcolor=ffffff3e \
+       --linecolor=ffffff00 --keyhlcolor=00000080 --ringvercolor=00000000 \
+       --separatorcolor=22222260 --insidevercolor=0000001c \
+       --ringwrongcolor=00000055 --insidewrongcolor=0000001c)
 
 LOCK=()
 while read LINE
@@ -80,7 +80,7 @@ done <<<"$(xrandr)"
 convert "$IMAGE" "${HUE[@]}" "${EFFECT[@]}" "${LOCK[@]}" "$IMAGE"
 
 # try to use a forked version of i3lock with prepared parameters
-if ! i3lock-color -n "${PARAM[@]}" -i "$IMAGE" > /dev/null 2>&1; then
+if ! i3lock -n "${PARAM[@]}" -i "$IMAGE" > /dev/null 2>&1; then
     # We have failed, lets get back to stock one
     i3lock -n -i "$IMAGE"
 fi
