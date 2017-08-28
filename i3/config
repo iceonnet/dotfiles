@@ -25,8 +25,8 @@
         set $mod Mod4
 
     # Monitors (found with xrandr)
-        set $monitor_main       DP-2
-        set $monitor_extra      DP-0
+        set $monitor_main       DVI-I-2
+        set $monitor_extra      DVI-I-1
 
     # Pulse Auto sink (get sink with pactl list sinks)
         set $pulse_sink 2
