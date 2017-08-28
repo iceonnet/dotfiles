@@ -23,7 +23,8 @@ xset s off off -dpms
 
 # Setup monitors
     sleep 5
-    (xrandr --output DP-2 --rate 165 --primary; xrandr --output DP-0 --mode 2560x1440 --right-of DP-2
+    (xrandr --output DP-2 --mode 2560x1440 --rate 165 --primary;
+     xrandr --output DP-0 --mode 2560x1440 --rate 165 --right-of DP-2
         ) && notify-send "[xrandr] monitors"
 
 # set background
