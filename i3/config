@@ -165,10 +165,8 @@
             bindsym $mod+Shift+Up    move up
             bindsym $mod+Shift+Down  move down
 
-        # bindsym $mod+c floating disable; floating enable; resize set 1120 1061; move right 400
-        bindsym $mod+Shift+c floating disable; floating enable; resize set 1920 1280; move position center
-        bindsym $mod+Ctrl+c floating disable; floating enable; resize set 1322 964; move position center
-        bindsym $mod+Shift+Ctrl+c floating disable; floating enable; resize set 459 883; move position center
+        bindsym $mod+Shift+c floating disable; floating enable; resize set 1322 964; move position center
+        bindsym $mod+Ctrl+c floating disable; floating enable; resize set 1000 780; move position center
         bindsym $mod+c move position center
 
     # Modes
