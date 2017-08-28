@@ -14,6 +14,6 @@ rofi.font:                          mono 20
 rofi.columns:                       1
 rofi.lines:                         10
 rofi.location:                      0
-rofi.padding:                       600
+rofi.padding:                       400
 rofi.fullscreen:                    true
 rofi.fuzzy:                         true
