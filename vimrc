@@ -18,11 +18,16 @@
 " }}}
 
 let mapleader=","       " leader is comma
+let g:airline_powerline_fonts = 1
+let g:airline_theme='base16color'
 
 nnoremap <leader><space> :nohlsearch<CR>
 noremap <space> za
 
 call plug#begin()
+    Plug 'tpope/vim-fugitive'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
     Plug 'tpope/vim-sensible'
     Plug 'francoiscabrol/ranger.vim'
     Plug 'airblade/vim-gitgutter'
