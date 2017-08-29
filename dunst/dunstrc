@@ -175,7 +175,7 @@
     # Redisplay last message(s).
     # On the US keyboard layout "grave" is normally above TAB and left
     # of "1".
-    history = mod4+shift+r
+    history = mod4+mod1+h
 
     # Context menu.
     context = ctrl+shift+period
