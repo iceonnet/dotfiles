@@ -83,6 +83,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias gg='git log --oneline --abbrev-commit --all --graph --decorate --color'
 alias upgrade="sudo apt update && sudo apt upgrade"
 alias :q=exit
 
