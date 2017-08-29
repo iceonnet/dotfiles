@@ -22,7 +22,7 @@ xset s off off -dpms
     pactl set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo &
 
 # Setup monitors
-    sleep 5
+    sleep 2
     (xrandr --output DP-2 --mode 2560x1440 --rate 165 --primary;
      xrandr --output DP-0 --mode 2560x1440 --rate 165 --right-of DP-2
         ) && notify-send "[xrandr] monitors"
