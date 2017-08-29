@@ -122,7 +122,7 @@
         # dmenu
             bindsym $mod+d exec --no-startup-id xrdb ~/.Xresources; exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -matching fuzzy -dmenu -i -p ""' # requires rofi
             bindsym $mod+Shift+w exec --no-startup-id xrdb ~/.Xresources; exec --no-startup-id rofi -show window -fuzzy
-            bindsym $mod+Shift+d exec --no-startup-id xrdb ~/.Xresources; exec ~/Sublime_Projects/Ideas/custom_rofi/main_menu.sh
+            bindsym $mod+Shift+d exec --no-startup-id xrdb ~/.Xresources; exec ~/bin/custom_rofi/main_menu.sh
             bindsym $mod+Shift+h exec --no-startup-id python Sublime_Projects/blank/test.py fetch
 
 
