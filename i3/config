@@ -44,9 +44,9 @@
         set $Workspace_6        6
         set $Workspace_7        7
         set $Workspace_8        8
-        set $Workspace_9        9 Mumble
+        set $Workspace_9        9
         set $Workspace_VM       10 VM
-        set $Workspace_TV       TeamViewer
+        set $Workspace_TV       VDI
 
 
 #---------------------------\
@@ -179,10 +179,10 @@
     # Monitor Tweaking
         # Main only
             bindsym $mod+Shift+F11 exec xrandr --output $monitor_main --off
-            bindsym $mod+F11 exec "xrandr --output $monitor_main --mode 2560x1440 --rate 165 --primary; xrandr --output $monitor_main --left-of $monitor_extra;"
+            bindsym $mod+F11 exec "xrandr --output $monitor_main --mode 1920x1080 --rate 60 --primary; xrandr --output $monitor_extra --left-of $monitor_main --mode 1920x1080 --rate 60;"
         # Both
             bindsym $mod+Shift+F12  exec xrandr --output $monitor_extra --off
-            bindsym $mod+F12 exec "xrandr --output $monitor_extra --mode 2560x1440 --rate 165; xrandr --output $monitor_extra --right-of $monitor_main --primary;"
+            bindsym $mod+F12 exec "xrandr --output $monitor_extra --mode 1920x1080 --rate 60 --left-of $monitor_main"
 
     # Other
         # Exit i3 (logs you out of your X session)
@@ -256,8 +256,8 @@
             bindsym $mod+Shift+plus         move container to workspace     $Workspace_TV;
 
         # Move Workspace to specific monitor
-            bindsym $mod+Shift+n            move workspace to output $monitor_main
-            bindsym $mod+Shift+m            move workspace to output $monitor_extra
+            bindsym $mod+Shift+n            move workspace to output $monitor_extra
+            bindsym $mod+Shift+m            move workspace to output $monitor_main
 
 
         bindsym $mod+Ctrl+Left  resize shrink width   50 px or 1 ppt
