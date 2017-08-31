@@ -6,7 +6,7 @@ xset s off off -dpms
     (xautolock -corners ---- -time 15 -locker ~/bin/lock_fadeout.sh &) && notify-send -u critical "[xautolock] started"
 
 # redshift
-    killall redshift; redshift & notify-send "[redshift] started"
+    ps -A | grep redshift > /dev/null || redshift & notify-send "[redshift] started"
 
 # Dropbox
     dropbox start && notify-send "[Drobox] started"
