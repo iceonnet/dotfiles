@@ -98,8 +98,6 @@
 
     # Exec on i3 restart
         exec_always pkill dunst
-        exec_always --no-startup-id pkill redshift
-        exec_always --no-startup-id sleep 1 && redshift&
 
     # Gaps
     gaps inner 12
