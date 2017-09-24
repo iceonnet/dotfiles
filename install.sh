@@ -116,8 +116,7 @@ clear
         mkdir $SOFTWARE_PATH && cd $_
 
         # PyCharm
-            wget https://download.jetbrains.com/python/pycharm-professional-2016.2.tar.gz -O - | \
-                tar xz
+            curl "https://data.services.jetbrains.com/products/download?code=PCP&platform=linux" | tar -xJ
         # Arduino
             curl http://downloads.arduino.cc/arduino-1.6.10-linux64.tar.xz | \
                 tar -xJ
@@ -200,7 +199,7 @@ clear
     su $SUDO_USER bash -c "dconf write /org/gnome/terminal/legacy/profiles:/"$PROFILE"/background-color \"'rgb(43,48,59)'\""
     su $SUDO_USER bash -c "dconf write /org/gnome/terminal/legacy/profiles:/"$PROFILE"/foreground-color \"'rgb(192,197,206)'\""
     # xorg.conf
-        wget https://u36847543.dl.dropboxusercontent.com/u/36847543/Ubuntu/xorg.conf -O /etc/X11/xorg.conf 
+        wget https://www.dropbox.com/s/fmlajhs38de9nba/xorg.conf?dl=1 -O /etc/X11/xorg.conf
 
 
 # Final message
