@@ -6,7 +6,6 @@
 	"installed_packages":
 	[
 		"AdvancedNewFile",
-		"Anaconda",
 		"CodeFormatter",
 		"Compare Side-By-Side",
 		"CSS3",
@@ -24,10 +23,6 @@
 		"requirementstxt",
 		"SnippetMaker",
 		"Splunk Syntax",
-		"SublimeLinter",
-		"SublimeLinter-contrib-bashate",
-		"SublimeLinter-pep8",
-		"SublimeLinter-pyflakes",
 		"Terminal",
 		"Theme - Spacegray",
 		"Virtualenv"
