@@ -21,6 +21,7 @@ let mapleader=","       " leader is comma
 
 nnoremap <leader><space> :nohlsearch<CR>
 noremap <space> za
+set pastetoggle=<F2>
 
 call plug#begin()
     Plug 'tpope/vim-sensible'
