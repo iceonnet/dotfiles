@@ -3,7 +3,7 @@
     set foldmethod=marker   " fold based on indent level
     set foldenable          " don't fold files by default on open
     nnoremap <space> za
-" " }}}
+" }}}
 
 " Settings {{{
     set wildmenu            " visual autocomplete for command menu
@@ -15,6 +15,8 @@
     set lazyredraw          " redraw only when we need to.
     set incsearch           " search as characters are entered
     set hlsearch            " highlight matches
+    set relativenumber      " shows relative line numbers
+    set nonumber            " hides current line number (sets to 0)
 " }}}
 
 let mapleader=","       " leader is comma
