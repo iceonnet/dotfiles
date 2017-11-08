@@ -37,6 +37,7 @@ call plug#begin()
     Plug 'francoiscabrol/ranger.vim'
     Plug 'airblade/vim-gitgutter'
     Plug 'scrooloose/nerdtree'
+    Plug 'ctrlpvim/ctrlp.vim'
 call plug#end()
 " }}}
 
