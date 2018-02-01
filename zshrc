@@ -85,9 +85,12 @@ source $ZSH/oh-my-zsh.sh
 
 alias upgrade="sudo apt update && sudo apt upgrade"
 alias :q=exit
+alias settings="export XDG_CURRENT_DESKTOP=\"Unity\"; gnome-control-center"
+alias gs="git status"
 
 export WORKON_HOME=$HOME/Virtual_Environments
 export PROJECT_HOME=$HOME/PycharmProjects
 export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
 source /usr/local/bin/virtualenvwrapper_lazy.sh
+
 
