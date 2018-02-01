@@ -26,7 +26,8 @@
   [[default]]
     background_color = "#2b303b"
     background_darkness = 0.91
-    background_image = None
     background_type = transparent
-    font = Sans 13
+    cursor_color = "#aaaaaa"
+    font = Ubuntu Mono 11
     scrollback_lines = 1000000
+    use_system_font = False

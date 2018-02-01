@@ -29,7 +29,7 @@
         set $monitor_extra      DVI-I-1
 
     # Pulse Auto sink (get sink with pactl list sinks)
-        set $pulse_sink 2
+        set $pulse_sink 0
 
     # Screenshot Folder
         set $screenshot_folder  ~/Dropbox/Screenshots/Scrot
@@ -122,7 +122,7 @@
         # dmenu
             bindsym $mod+d exec --no-startup-id xrdb ~/.Xresources; exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -matching fuzzy -dmenu -i -p ""' # requires rofi
             bindsym $mod+Shift+w exec --no-startup-id xrdb ~/.Xresources; exec --no-startup-id rofi -show window -fuzzy
-            bindsym $mod+Shift+d exec --no-startup-id xrdb ~/.Xresources; exec ~/Sublime_Projects/Ideas/custom_rofi/main_menu.sh
+            bindsym $mod+Shift+d exec --no-startup-id xrdb ~/.Xresources; exec ~/bin/custom_rofi/main_menu.sh
             bindsym $mod+Shift+h exec --no-startup-id python Sublime_Projects/blank/test.py fetch
 
 
@@ -145,6 +145,7 @@
 
         # Kill focused window
             bindsym $mod+Shift+q kill
+            bindsym $mod+Ctrl+Shift+q --release exec xkill
 
     # Layout
         # Change container layout (stacked, tabbed, toggle split)
@@ -196,10 +197,11 @@
 
         # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
             bindsym $mod+Ctrl+Shift+r restart
+            bindsym $mod+Shift+r exec i3-msg reload
 
         # Lock workstation
-            bindsym $mod+l       exec lock
-            bindsym $mod+Shift+l exec lock
+            bindsym Mod4+l       exec lock
+            bindsym Mod4+Shift+l exec lock
 
         # Kill window
             bindsym --release $mod+button2 kill
