@@ -1,12 +1,14 @@
 {
     "color_scheme": "Packages/Theme - Spacegray/base16-ocean.dark.tmTheme",
     "font_size": 12,
+    "close_windows_when_empty": false,
     "ignored_packages":
     [
         "Vintage"
     ],
     "line_padding_top": 1.5,
     "no_column_highlights_line": true,
+    "show_line_endings": true,
     "theme": "Spacegray.sublime-theme",
     "translate_tabs_to_spaces": true,
     "trim_trailing_white_space_on_save": true,
