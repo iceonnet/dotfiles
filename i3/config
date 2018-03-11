@@ -87,7 +87,7 @@
     # dmenu {{{
         bindsym $mod+d                          $exec xrdb ~/.Xresources; $exec i3-dmenu-desktop --dmenu='rofi -matching fuzzy -dmenu -i -p ""'
         bindsym $mod+Shift+w                    $exec xrdb ~/.Xresources; $exec rofi -show window
-        bindsym $mod+Shift+d                    $exec xrdb ~/.Xresources; exec ~/bin/custom_rofi/main_menu.sh
+        bindsym $mod+Shift+d                    $exec xrdb ~/.Xresources; exec ~/bin/custom_rofi_menu/main_menu.sh
         bindsym $mod+Shift+h                    $exec python Sublime_Projects/blank/test.py fetch
     # }}}
     # Screenshot {{{
