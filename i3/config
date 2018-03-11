@@ -5,331 +5,240 @@
 #   https://fortawesome.github.io/Font-Awesome/cheatsheet/
 
 
-#---------------------------\
-#   Variables               |
-#---------------------------/
+# Variables {{{
+    # border
+        set $border_size 1
 
-    # Colors
-        set $background         #2f343f
-        set $background_HL      #8f949f
-        set $focused            #fcfff2
-        set $focused_inactive   #bfc4cf
-        set $indicator          #3f3f3f
-        set $unfocused          #5f646f
-        set $urgent             #ff0000
+    # Exec
+        set $exec               exec --no-startup-id
 
-    # Font
-        set $fontsize 10
+    # Mod Key
+        set $mod                Mod4
 
-    # Mod key (Windows/Super)
-        set $mod Mod4
-
-    # Monitors (found with xrandr)
-        set $monitor_main       DP-2
+    # Monitors {{{
+        set $monitor_main       DP-4
         set $monitor_extra      DP-0
+    # }}}
 
     # Pulse Auto sink (get sink with pactl list sinks)
-        set $pulse_sink 2
+        set $pulse_sink 1
 
     # Screenshot Folder
-        set $screenshot_folder  ~/Dropbox/Screenshots/Scrot
+        set $screenshot_folder ~/Dropbox/Screenshots/Scrot
 
-    # Workspaces
+    # Workspaces {{{
         #   variable            Name
-        set $Workspace_1        1 
-        set $Workspace_2        2
-        set $Workspace_3        3 
-        set $Workspace_4        4
-        set $Workspace_5        5 
-        set $Workspace_6        6
-        set $Workspace_7        7
-        set $Workspace_8        8
-        set $Workspace_9        9 Mumble
-        set $Workspace_VM       10 VM
-        set $Workspace_TV       TeamViewer
-
-
-#---------------------------\
-#   Config                  |
-#---------------------------/
-
+        set $workspace_01       01
+        set $workspace_02       02
+        set $workspace_03       03
+        set $workspace_04       04
+        set $workspace_05       05
+        set $workspace_06       06
+        set $workspace_07       07
+        set $workspace_08       08
+        set $workspace_09       09
+        set $workspace_10       10
+        set $workspace_11       11
+    # }}}
+# }}}
+# Config {{{
     # Fonts
-        font pango:DejaVu Sans $fontsize
+        font pango:DejaVu Sans 10
 
-    # Coloring
-        client.background           $background
+    # move floating windows (Mod+Mouse)
+        floating_modifier $mod
 
-        # Colorclass                border          backgr.         text                indicator
-        client.focused              $background     $background     $focused            $indicator
-        client.focused_inactive     $background     $background     $focused_inactive   $indicator
-        client.unfocused            $background     $background     $unfocused          $indicator
-        client.urgent               $background     $background     #ffffff             $indicator
-        client.placeholder          $background     $background     #ffffff             $indicator
+    # Coloring {{{
+        client.background           #2f343f
 
-    # i3bar
-        bar {
-            colors {
-                background          $background
-                statusline          $focused_inactive
-                separator           $background
-
-                # colorclass        border          background          text
-                focused_workspace   $background     $background         $focused
-                active_workspace    $background     $background         $focused_inactive
-                inactive_workspace  $background     $background         $unfocused
-                urgent_workspace    $background     $background         $urgent
-            }
-            font pango:FontAwesome $fontsize
-            separator_symbol " "
-            status_command i3blocks -c ~/.i3/i3blocks.conf
-            strip_workspace_numbers yes
-            tray_output $monitor_main
-        }
-        # Bindings for i3blocks (Caps/NumLock)
-            bindsym --release Caps_Lock exec --no-startup-id pkill -SIGRTMIN+11 i3blocks
-            bindsym --release Num_Lock  exec --no-startup-id pkill -SIGRTMIN+11 i3blocks
+        # Colorclass                border          background      text            indicator
+        client.focused              #2f343f         #2f343f         #fcfff2         #3f3f3f
+        client.focused_inactive     #2f343f         #2f343f         #bfc4cf         #3f3f3f
+        client.unfocused            #2f343f         #2f343f         #5f646f         #3f3f3f
+        client.urgent               #2f343f         #2f343f         #ffffff         #3f3f3f
+        client.placeholder          #2f343f         #2f343f         #ffffff         #3f3f3f
+    # }}}
 
     # Startup applications
-        exec --no-startup-id bash ~/bin/startup.sh &
+        exec_always --no-startup-id bash ~/bin/startup.sh &
+        exec_always --no-startup-id ~/.config/polybar/launch.sh
 
-    # Minor changes
-        # Set the size of Window border
-            new_window normal 1 px
+    # Window border size
+        new_window normal 1 px
 
-    # Exec on i3 restart
-        exec_always pkill dunst
+    # Gaps {{{
+        gaps inner 32
+        gaps outer 48
+    # }}}
+# }}}
+# Bindings {{{
+    # Scripts / Terminals {{{
+        bindsym $mod+Ctrl+Return                $exec i3-sensible-terminal -e ~/bin/tmux.sh >> /tmp/test.txt
+        bindsym $mod+Return                     $exec i3-sensible-terminal
+        bindsym $mod+Shift+Return               $exec i3-sensible-terminal -p dimmed -e ~/bin/blank_shell.sh
+        bindsym $mod+Ctrl+h                     $exec i3-sensible-terminal -e zsh -ic htop
+        bindsym $mod+r                          $exec i3-sensible-terminal -e zsh -ic ranger
 
-    # Gaps
-    gaps inner 12
-    smart_gaps on
+        bindsym $mod+Shift+T                    $exec "~/bin/notifications/temperature.sh"
+        bindsym $mod+Ctrl+W                     $exec "~/bin/set_wallpaper.sh"
+        bindsym $mod+Mod1+l                     $exec lutris
 
+    # }}}
+    # dmenu {{{
+        bindsym $mod+d                          $exec xrdb ~/.Xresources; $exec i3-dmenu-desktop --dmenu='rofi -matching fuzzy -dmenu -i -p ""'
+        bindsym $mod+Shift+w                    $exec xrdb ~/.Xresources; $exec rofi -show window
+        bindsym $mod+Shift+d                    $exec xrdb ~/.Xresources; exec ~/bin/custom_rofi/main_menu.sh
+        bindsym $mod+Shift+h                    $exec python Sublime_Projects/blank/test.py fetch
+    # }}}
+    # Screenshot {{{
+        bindsym Print                           exec scrot -m -e 'mv $f $screenshot_folder/Full'                                                # full screen capture (all monitors)
+        bindsym $mod+Shift+S --release          exec scrot -s -e 'mv $f $screenshot_folder/Region' && notify-send "Saved region"                # region capture (simulating Evernote)
+        bindsym $mod+S --release                exec import png:- | xclip -selection c -t image/png && notify-send -u low "Copied to Clipboard" # region capture to clipboard
+        bindsym $mod+Shift+Print --release      exec scrot -u -e 'mv $f $screenshot_folder/Window'                                              # active window capture
+    # }}}
+    # Media keys {{{
+        bindsym Shift+KP_Add                    $exec playerctl volume 0.05+
+        bindsym Shift+KP_Subtract               $exec playerctl volume 0.05-
+        bindsym XF86AudioPlay                   $exec playerctl play-pause
+        bindsym XF86AudioStop                   $exec playerctl stop
+        bindsym XF86AudioPrev                   $exec playerctl previous
+        bindsym XF86AudioNext                   $exec playerctl next
+        bindsym Shift+XF86AudioNext             $exec playerctl position 10+
+        bindsym Shift+XF86AudioPrev             $exec playerctl position 10-
+        bindsym Ctrl+XF86AudioNext              $exec playerctl position 60+
+        bindsym Ctrl+XF86AudioPrev              $exec playerctl position 60-
+        bindsym Ctrl+Shift+XF86AudioNext        $exec playerctl position 600+
+        bindsym Ctrl+Shift+XF86AudioPrev        $exec playerctl position 600-
 
+        bindsym XF86AudioRaiseVolume            exec pactl set-sink-volume $pulse_sink +1%;    exec pkill -SIGRTMIN+10 i3blocks
+        bindsym XF86AudioLowerVolume            exec pactl set-sink-volume $pulse_sink -1%;    exec pkill -SIGRTMIN+10 i3blocks
+        bindsym XF86AudioMute                   exec pactl set-sink-mute   $pulse_sink toggle; exec pkill -SIGRTMIN+10 i3blocks
+    # }}}
+    # Containers / Windows {{{
+        # Layout {{{
+            bindsym $mod+h                      split h
+            bindsym $mod+v                      split v
 
-#---------------------------\
-#   Bindings                |
-#---------------------------/
+            bindsym $mod+w                      layout tabbed
+            bindsym $mod+e                      layout toggle split
+            bindsym $mod+a                      focus parent
+        # }}}
+        # Focus {{{
+            bindsym $mod+Left                   focus left
+            bindsym $mod+Down                   focus down
+            bindsym $mod+Up                     focus up
+            bindsym $mod+Right                  focus right
 
-    # Note: get keys with xev or xmodmap (-pke)
+            bindsym $mod+space                  focus mode_toggle
+        # }}}
+        # Move {{{
+            bindsym $mod+Shift+Left             move left
+            bindsym $mod+Shift+Right            move right
+            bindsym $mod+Shift+Up               move up
+            bindsym $mod+Shift+Down             move down
+        # }}}
+        # Resize {{{
+            bindsym $mod+Ctrl+Left              resize shrink width   50 px or 1 ppt
+            bindsym $mod+Ctrl+Right             resize grow   width   50 px or 1 ppt
+            bindsym $mod+Ctrl+Up                resize shrink height  25 px or 2 ppt
+            bindsym $mod+Ctrl+Down              resize grow   height  25 px or 2 ppt
+        # }}}
+        # Floating {{{
+            bindsym $mod+Shift+space            floating toggle
+            bindsym $mod+c                      move position center
 
-    bindsym $mod+Shift+T exec --no-startup-id "~/bin/notifications/temperature.sh"
+            bindsym $mod+Shift+c                floating disable; floating enable; resize set 1920 1280;    move position center
+            bindsym $mod+Ctrl+c                 floating disable; floating enable; resize set 1322 964;     move position center
+            bindsym $mod+Shift+Ctrl+c           floating disable; floating enable; resize set 459 883;      move position center
+        # }}}
 
-    # Execute
-        # Terminal
-            bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
+        bindsym $mod+f                          fullscreen toggle
 
-        # dmenu
-            bindsym $mod+d exec --no-startup-id xrdb ~/.Xresources; exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -matching fuzzy -dmenu -i -p ""' # requires rofi
-            bindsym $mod+Shift+w exec --no-startup-id xrdb ~/.Xresources; exec --no-startup-id rofi -show window -fuzzy
-            bindsym $mod+Shift+d exec --no-startup-id xrdb ~/.Xresources; exec ~/bin/custom_rofi/main_menu.sh
-            bindsym $mod+Shift+h exec --no-startup-id python Sublime_Projects/blank/test.py fetch
+        bindsym $mod+Shift+q                    kill
+    # }}}
+    # Workspaces {{{
+        bindsym $mod+1                          workspace $workspace_01;    move workspace to output DP-4;
+        bindsym $mod+2                          workspace $workspace_02;    move workspace to output DP-4;
+        bindsym $mod+3                          workspace $workspace_03;    move workspace to output DP-4;
+        bindsym $mod+4                          workspace $workspace_04;    move workspace to output DP-4;
+        bindsym $mod+5                          workspace $workspace_05;    move workspace to output DP-4;
+        bindsym $mod+6                          workspace $workspace_06;
+        bindsym $mod+7                          workspace $workspace_07;    move workspace to output DP-0;
+        bindsym $mod+8                          workspace $workspace_08;    move workspace to output DP-0;
+        bindsym $mod+9                          workspace $workspace_09;    move workspace to output DP-0;
+        bindsym $mod+0                          workspace $workspace_10;    move workspace to output DP-0;
+        bindsym $mod+plus                       workspace $workspace_11;    move workspace to output DP-0;
 
-
-    # Floating windows
-        # move floating windows (Mod+Mouse)
-            floating_modifier $mod
-
-    # Focus
-        # Change focus
-            bindsym $mod+Left  focus left
-            bindsym $mod+Down  focus down
-            bindsym $mod+Up    focus up
-            bindsym $mod+Right focus right
-
-        # Change focus between tiling / floating windows
-            bindsym $mod+space focus mode_toggle
-
-        # Enter fullscreen mode for the focused container
-            bindsym $mod+f fullscreen toggle
-
-        # Kill focused window
-            bindsym $mod+Shift+q kill
-
-    # Layout
-        # Change container layout (stacked, tabbed, toggle split)
-            # bindsym $mod+s layout stacking
-            bindsym $mod+w layout tabbed
-            bindsym $mod+e layout toggle split
-            bindsym $mod+a focus parent
-
-        # Toggle tiling / floating
-            bindsym $mod+Shift+space floating toggle
-
-        # Toggle Scratchpad
-            #bindsym $mod+Ctrl+space move scratchpad
-            #bindsym $mod+Mod1+space scratchpad show
-        # Move window in container
-            bindsym $mod+Shift+Left  move left
-            bindsym $mod+Shift+Right move right
-            bindsym $mod+Shift+Up    move up
-            bindsym $mod+Shift+Down  move down
-
-        # bindsym $mod+c floating disable; floating enable; resize set 1120 1061; move right 400
-        bindsym $mod+Shift+c floating disable; floating enable; resize set 1920 1280; move position center
-        bindsym $mod+Ctrl+c floating disable; floating enable; resize set 1322 964; move position center
-        bindsym $mod+Shift+Ctrl+c floating disable; floating enable; resize set 459 883; move position center
-        bindsym $mod+c move position center
-
-    # Modes
-        # Resize
-            bindsym $mod+r mode "resize"
-
-        # System shutdown menu
-            bindsym $mod+Scroll_Lock mode "$mode_system"
-
-    # Monitor Tweaking
-        # Main only
-            bindsym $mod+Shift+F11 exec xrandr --output $monitor_main --off
-            bindsym $mod+F11 exec "xrandr --output $monitor_main --mode 2560x1440 --rate 165 --primary; xrandr --output $monitor_main --left-of $monitor_extra;"
-        # Both
-            bindsym $mod+Shift+F12  exec xrandr --output $monitor_extra --off
-            bindsym $mod+F12 exec "xrandr --output $monitor_extra --mode 2560x1440 --rate 165; xrandr --output $monitor_extra --right-of $monitor_main --primary;"
-
-    # Other
-        # Exit i3 (logs you out of your X session)
-            bindsym $mod+Shift+e  mode "$mode_system"
-
-        # Split in horizontal orientation
-            bindsym $mod+h split h
-
-        # Split in vertical orientation
-            bindsym $mod+v split v
-
-        # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-            bindsym $mod+Ctrl+Shift+r restart
-
-        # Lock workstation
-            bindsym $mod+l       exec lock
-            bindsym $mod+Shift+l exec lock
-
-        # Kill window
-            bindsym --release $mod+button2 kill
-
-    # Screenshot
-        bindsym Print                       exec scrot -m -e 'mv $f $screenshot_folder/Full'    # full screen capture (all monitors)
-        bindsym $mod+Shift+S --release      exec scrot -s -e 'mv $f $screenshot_folder/Region'  # region capture (simulating Evernote)
-        bindsym $mod+S --release            exec import png:- | xclip -selection c -t image/png # region capture to clipboard
-        bindsym $mod+Shift+Print --release  exec scrot -u -e 'mv $f $screenshot_folder/Window'  # active window capture
-
-    # Volume controls for Pulse
-        bindsym XF86AudioRaiseVolume        exec pactl set-sink-volume $pulse_sink +1%;    exec pkill -SIGRTMIN+10 i3blocks
-        bindsym XF86AudioLowerVolume        exec pactl set-sink-volume $pulse_sink -1%;    exec pkill -SIGRTMIN+10 i3blocks
-        bindsym XF86AudioMute               exec pactl set-sink-mute   $pulse_sink toggle; exec pkill -SIGRTMIN+10 i3blocks
-
-    # Media keys
-        bindsym XF86AudioPlay exec playerctl play-pause
-        bindsym XF86AudioStop exec playerctl stop
-        bindsym XF86AudioNext exec playerctl next
-        bindsym XF86AudioPrev exec playerctl previous
-
-        # used to update Volume block
-            exec_always sleep 0.1 && pkill -SIGRTMIN+10 i3blocks
-
-    # Kill window
-        bindsym --whole-window $mod+Ctrl+Shift+button1 kill
-
-    # Workspaces
-        # Switch to workspace
-            bindsym $mod+1                  workspace $Workspace_1;         move workspace to output $monitor_main;
-            bindsym $mod+2                  workspace $Workspace_2;         move workspace to output $monitor_main;
-            bindsym $mod+3                  workspace $Workspace_3;         move workspace to output $monitor_main;
-            bindsym $mod+4                  workspace $Workspace_4;         move workspace to output $monitor_main;
-            bindsym $mod+5                  workspace $Workspace_5;                                                     exec --no-startup-id ~/bin/start_Steam.sh&
-            bindsym $mod+6                  workspace $Workspace_6;
-            #append_layout /home/iceonnet/i3wm-ws6.json;
-            bindsym $mod+7                  workspace $Workspace_7;         move workspace to output $monitor_extra;
-            bindsym $mod+8                  workspace $Workspace_8;         move workspace to output $monitor_extra;
-            bindsym $mod+9                  workspace $Workspace_9;         move workspace to output $monitor_extra;    exec --no-startup-id ~/bin/start_Discord.sh&
-            bindsym $mod+0                  workspace $Workspace_VM;                                                    layout tabbed
-            bindsym $mod+plus               workspace $Workspace_TV;        move workspace to output $monitor_extra;
-
-        # Move focused container to workspace
-            bindsym $mod+Shift+1            move container to workspace     $Workspace_1;
-            bindsym $mod+Shift+2            move container to workspace     $Workspace_2;
-            bindsym $mod+Shift+3            move container to workspace     $Workspace_3;
-            bindsym $mod+Shift+4            move container to workspace     $Workspace_4;
-            bindsym $mod+Shift+5            move container to workspace     $Workspace_5;
-            bindsym $mod+Shift+6            move container to workspace     $Workspace_6;
-            bindsym $mod+Shift+7            move container to workspace     $Workspace_7;
-            bindsym $mod+Shift+8            move container to workspace     $Workspace_8;
-            bindsym $mod+Shift+9            move container to workspace     $Workspace_9;
-            bindsym $mod+Shift+0            move container to workspace     $Workspace_VM;
-            bindsym $mod+Shift+plus         move container to workspace     $Workspace_TV;
+        bindsym $mod+Shift+1                    move container to workspace $workspace_01;
+        bindsym $mod+Shift+2                    move container to workspace $workspace_02;
+        bindsym $mod+Shift+3                    move container to workspace $workspace_03;
+        bindsym $mod+Shift+4                    move container to workspace $workspace_04;
+        bindsym $mod+Shift+5                    move container to workspace $workspace_05;
+        bindsym $mod+Shift+6                    move container to workspace $workspace_06;
+        bindsym $mod+Shift+7                    move container to workspace $workspace_07;
+        bindsym $mod+Shift+8                    move container to workspace $workspace_08;
+        bindsym $mod+Shift+9                    move container to workspace $workspace_09;
+        bindsym $mod+Shift+0                    move container to workspace $workspace_10;
+        bindsym $mod+Shift+plus                 move container to workspace $workspace_11;
 
         # Move Workspace to specific monitor
-            bindsym $mod+Shift+n            move workspace to output $monitor_main
-            bindsym $mod+Shift+m            move workspace to output $monitor_extra
+            bindsym $mod+Shift+n                move workspace to output DP-4
+            bindsym $mod+Shift+m                move workspace to output DP-0
+    # }}}
+    # Modes {{{
+        # System shutdown menu {{{
+            bindsym $mod+Shift+e  mode "$mode_system"
 
+            set $mode_system (l) lock, (e) logout, (h) hibernate, (r) reboot, (Shift+s) shutdown, (Ctrl+Shift+x) exit
+            mode "$mode_system" {
+                bindsym l                       $exec xautolock -locknow,  mode "default"
+                bindsym e                       $exec i3exit logout,       mode "default"
+                bindsym h                       $exec i3exit hibernate,    mode "default"
+                bindsym r                       $exec i3exit reboot,       mode "default"
+                bindsym Shift+s                 $exec i3exit shutdown,     mode "default"
+                bindsym Ctrl+Shift+x            $exec i3-msg exit,         mode "default"
+                bindsym Escape                  mode "default"
+            }
+        # }}}
+    # }}}
 
-        bindsym $mod+Ctrl+Left  resize shrink width   50 px or 1 ppt
-        bindsym $mod+Ctrl+Right resize grow   width   50 px or 1 ppt
-        bindsym $mod+Ctrl+Up    resize shrink height  25 px or 2 ppt
-        bindsym $mod+Ctrl+Down  resize grow   height  25 px or 2 ppt
-#---------------------------\
-#   Modes                   |
-#---------------------------/
+    # Monitor Tweaking {{{
+        # Main only
+            bindsym $mod+Shift+F11              exec xrandr --output $monitor_main --off
+            bindsym $mod+F11                    exec xrandr --output $monitor_main --mode 2560x1440 --rate 165 --primary
+        # Both
+            bindsym $mod+Shift+F12              exec xrandr --output $monitor_extra --off
+            bindsym $mod+F12                    exec xrandr --output $monitor_extra --mode 2560x1440 --rate 165 --right-of $monitor_main
+    # }}}
 
-    # Resize
-        mode "resize" {
-            bindsym Left  resize shrink width   50 px or 1 ppt
-            bindsym Right resize grow   width   50 px or 1 ppt
-            bindsym Up    resize shrink height  25 px or 2 ppt
-            bindsym Down  resize grow   height  25 px or 2 ppt
+    bindsym $mod+Ctrl+Shift+r                   restart
 
-            bindsym Escape mode "default"
-        }
-
-    # System shutdown menu
-        #set $mode_system (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown, (Ctrl+Shift+x) exit
-        set $mode_system (l) lock, (e) logout, (h) hibernate, (r) reboot, (Shift+s) shutdown, (Ctrl+Shift+x) exit
-        mode "$mode_system" {
-            bindsym l             exec --no-startup-id i3exit lock,       mode "default"
-            bindsym e             exec --no-startup-id i3exit logout,     mode "default"
-            #bindsym s             exec --no-startup-id i3exit suspend,    mode "default"
-            bindsym h             exec --no-startup-id i3exit hibernate,  mode "default"
-            bindsym r             exec --no-startup-id i3exit reboot,     mode "default"
-            bindsym Shift+s       exec --no-startup-id i3exit shutdown,   mode "default"
-            bindsym Ctrl+Shift+x  exec --no-startup-id i3-msg exit,       mode "default"
-
-            bindsym Escape  mode "default"
-        }
-
-
-
-#---------------------------\
-#   Workspaces              |
-#---------------------------/
+    bindsym $mod+l                              $exec xautolock -locknow
+    bindsym $mod+Shift+l                        $exec xautolock -locknow
+# }}}
+# Workspaces {{{
     # Force move (Get class with f.ex: xprop | grep WM_CLASS)
-        assign      [class="Sublime_text"]                      $Workspace_3
+        assign      [class="Lutris"]                            $workspace_02
+        assign      [class="Sublime_text"]                      $workspace_03
 
-        assign      [class="jetbrains-pycharm"]                 $Workspace_4
-        assign      [class="jetbrains-phpstorm"]                $Workspace_4
+        assign      [class="jetbrains-pycharm"]                 $workspace_04
+        assign      [class="jetbrains-phpstorm"]                $workspace_04
 
-        assign      [class="Steam"]                             $Workspace_5
+        assign      [class="Steam"]                             $workspace_05
 
-        assign      [class="Mumble"]                            $Workspace_9
-        assign      [class="discord"]                           $Workspace_9
+        assign      [class="Mumble"]                            $workspace_09
+        assign      [class="discord"]                           $workspace_06
 
-        assign      [class="Wine" instance="TeamViewer.exe"]    $Workspace_TV
+        assign      [class="Wine" instance="TeamViewer.exe"]    $workspace_11
 
-        assign      [class="VirtualBox"]                        $Workspace_VM
+        assign      [class="VirtualBox"]                        $workspace_10
 
-        # for_window  [workspace="$Workspace_6"]                  move workspace to output $monitor_extra
-        # for_window  [workspace="$Workspace_7"]                  move workspace to output $monitor_extra
-        # for_window  [workspace="$Workspace_8"]                  move workspace to output $monitor_extra
-        # for_window  [workspace="$Workspace_9"]                  move workspace to output $monitor_extra
-        # for_window  [workspace="$Workspace_VM"]                 move workspace to output $monitor_extra
-        # for_window  [workspace="$Workspace_TV"]                 move workspace to output $monitor_extra
-
-
-
-
-
-        # for_window  [workspace="$Workspace_3"]                  floating enable
-        # for_window  [workspace="$Workspace_5"]                  floating enable
-        #for_window  [workspace="$Workspace_4"]                  floating enable
-        for_window [class="^.*"] border pixel 0
-        for_window [class="Steam"] border normal
+        for_window [class="Google-chrome" title="^(.*?)?YouTube$"]   move to workspace $workspace_06
+        for_window [class="^.*"] border pixel $border_size
+        for_window [class="Spotify"] move to workspace $workspace_07
+        for_window [class="M(?i)Player"] move to workspace $workspace_06
         for_window [title=".*?sketch.*"] floating enable
         for_window [class="Minecraft.*"] floating enable
         for_window [class="com-intellij.*"] floating enable
+# }}}
 

@@ -1,0 +1,18 @@
+type = internal/temperature
+thermal-zone = 3
+warn-temperature = 70
+
+format = <ramp> <label>
+format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.primary}
+
+ramp-0 =
+ramp-1 =
+ramp-3 =
+ramp-4 = 
+ramp-foreground = #ffaa66

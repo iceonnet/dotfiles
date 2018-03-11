@@ -1,0 +1,48 @@
+monitor = ${env:MONITOR:}
+width = 100%
+height = 20
+offset-x = 0
+offset-y = 0
+bottom = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+
+overline-size = 0
+overline-color = #f00
+underline-size = 2
+underline-color = #00f
+
+border-top-size = 0
+border-top-color = #333
+border-bottom-size = 1
+border-bottom-color = #333
+
+padding-left = 0
+padding-right = 2
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = "Monospace Regular:pixelsize=10;+2"
+font-1 = "Font Awesome 5 Free Regular:pixelsize=12:size=12;+2"
+font-2 = "Font Awesome 5 Brands:pixelsize=12:size=12;+2"
+font-3 = "FontAwesome:pixelsize=12:size=12;+2"
+font-4 = "fontello:pixelsize=12:size=12;+2"
+
+modules-left = i3
+modules-center = player-mpris-tail
+#modules-right = player-mpris-tail xbacklight alsa xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-right = alsa xkeyboard memory cpu eth temperature date powermenu
+
+#tray-position = left
+#tray-padding = 2
+;tray-transparent = true
+;tray-background = #0063ff
+
+;wm-restack = i3
+
+;override-redirect = true
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev

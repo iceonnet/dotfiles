@@ -1,0 +1,39 @@
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+pin-workspaces = true
+strip-wsnumbers = true
+
+ws-icon-0  = "01;%{F}%{F}"
+ws-icon-1  = "02;%{F}2%{F}"
+ws-icon-2  = "03;%{F}%{F}"
+ws-icon-3  = "04;%{F}%{F}"
+ws-icon-4  = "05;%{F#00adee}%{F}"
+ws-icon-5  = "06;%{F#ff0000}%{F}"
+ws-icon-6  = "07;%{F#1db954}%{F}"
+ws-icon-7  = "08;%{F}8%{F}"
+ws-icon-8  = "09;%{F}9%{F}"
+ws-icon-9  = "10;%{F}0%{F}"
+ws-icon-10  = "11;%{F}10%{F}"
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+label-focused = %icon%
+label-focused-background = ${colors.background-alt}
+label-focused-underline = ${colors.primary}
+label-focused-padding = 2
+
+label-unfocused = %icon%
+label-unfocused-padding = 2
+
+label-urgent = %icon%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+label-visible = %icon%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}

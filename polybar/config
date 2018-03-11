@@ -1,0 +1,47 @@
+;=====================================================
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;=====================================================
+
+[colors]
+    background = ${xrdb:color0:#222}
+    background-alt = ${xrdb:color0:#222}
+    foreground = ${xrdb:color7:#222}
+    foreground-alt = ${xrdb:color7:#222}
+    primary = ${xrdb:color6:#222}
+    secondary = ${xrdb:color2:#222}
+    alert = ${xrdb:color3:#222}
+
+[global/wm]
+    margin-top = 5
+    margin-bottom = 5
+
+[bar/example]
+    include-file = ~/.config/polybar/bars/example
+
+[module/alsa]
+    include-file = ~/.config/polybar/modules/alsa
+[module/xkeyboard]
+    include-file = ~/.config/polybar/modules/xkeyboard
+[module/memory]
+    include-file = ~/.config/polybar/modules/memory
+[module/cpu]
+    include-file = ~/.config/polybar/modules/cpu
+[module/eth]
+    include-file = ~/.config/polybar/modules/eth
+[module/temperature]
+    include-file = ~/.config/polybar/modules/temperature
+[module/date]
+    include-file = ~/.config/polybar/modules/date
+[module/powermenu]
+    include-file = ~/.config/polybar/modules/powermenu
+[module/player-mpris-tail]
+    include-file = ~/.config/polybar/modules/player-mpris-tail
+[module/i3]
+    include-file = ~/.config/polybar/modules/i3
+
+; vim:ft=dosini

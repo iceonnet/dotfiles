@@ -1,15 +1,57 @@
 [global_config]
-  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
-  inactive_color_offset = 1.0
-  suppress_multiple_term_dialog = True
-  title_hide_sizetext = True
-  title_inactive_bg_color = "#1c1f26"
-  title_inactive_fg_color = "#c0c5ce"
-  title_receive_bg_color = "#1c1f26"
-  title_receive_fg_color = "#a3be8c"
-  title_transmit_bg_color = "#1c1f26"
-  title_transmit_fg_color = "#c0c5ce"
 [keybindings]
+  broadcast_all = ""
+  broadcast_group = ""
+  broadcast_off = ""
+  close_term = ""
+  close_window = ""
+  copy = <Primary><Shift>c
+  cycle_next = ""
+  cycle_prev = ""
+  edit_tab_title = ""
+  edit_terminal_title = ""
+  edit_window_title = ""
+  full_screen = ""
+  go_down = ""
+  go_left = ""
+  go_next = ""
+  go_prev = ""
+  go_right = ""
+  go_up = ""
+  group_all = ""
+  group_tab = ""
+  help = ""
+  hide_window = ""
+  insert_number = ""
+  insert_padded = ""
+  layout_launcher = ""
+  move_tab_left = ""
+  move_tab_right = ""
+  new_tab = ""
+  new_terminator = ""
+  new_window = ""
+  next_tab = ""
+  paste = <Primary><Shift>v
+  prev_tab = ""
+  reset = ""
+  reset_clear = ""
+  resize_down = ""
+  resize_left = ""
+  resize_right = ""
+  resize_up = ""
+  rotate_ccw = ""
+  rotate_cw = ""
+  scaled_zoom = ""
+  search = ""
+  split_horiz = ""
+  split_vert = ""
+  toggle_scrollbar = ""
+  toggle_zoom = ""
+  ungroup_all = ""
+  ungroup_tab = ""
+  zoom_in = <Primary>plus
+  zoom_normal = <Primary>0
+  zoom_out = <Primary>minus
 [layouts]
   [[default]]
     [[[child1]]]
@@ -18,15 +60,26 @@
       type = Terminal
     [[[window0]]]
       parent = ""
-      profile = None
-      size = 1400, 600
       type = Window
 [plugins]
 [profiles]
   [[default]]
-    background_color = "#2b303b"
-    background_darkness = 0.78
-    background_image = None
+    background_darkness = 0.9
     background_type = transparent
-    font = Sans 13
-    scrollback_lines = 1000000
+    cursor_color = "#aaaaaa"
+    scrollback_lines = 100000
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_theme_colors = True
+  [[dimmed]]
+    background_type = transparent
+    cursor_blink = False
+    cursor_color = "#000000"
+    cursor_color_fg = False
+    cursor_shape = underline
+    font = Mono 0
+    scroll_on_keystroke = False
+    scrollback_lines = 0
+    scrollbar_position = hidden
+    show_titlebar = False
+    use_system_font = False

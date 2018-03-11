@@ -124,19 +124,19 @@ class FanController(StoppableThread):
     def __init__(self):
         super(FanController, self).__init__()
         self.daemon = True
-        
+
     def run(self):
         self.customFanSpeed()
-        
+
     def stop(self):
         super(FanController, self).stop()
         time.sleep(1.5)
         self.resetFan()
-    
+
     def resetFan(self):
         print("\nReset to Auto Fan")
         process = Popen("nvidia-settings -a [gpu:0]/GPUFanControlState=0", shell=True, stdin=PIPE, stdout=PIPE)
-    
+
     def getTemp(self):
         process = Popen("nvidia-settings -q gpucoretemp", shell=True, stdin=PIPE, stdout=PIPE)
         line_array = process.stdout.readlines()
@@ -149,7 +149,7 @@ class FanController(StoppableThread):
         #that's the line to get ati fan speed
         process = Popen("nvidia-settings -a [gpu:0]/GPUFanControlState=1 -a [fan:0]/GPUTargetFanSpeed={0}".format(speed), shell=True, stdin=PIPE, stdout=PIPE)
         return
-    
+
     def customFanSpeed(self):
         """custom fan speed curve example:
             [[temp, speed],
@@ -184,7 +184,7 @@ class FanController(StoppableThread):
                 f.write('')
 
             time.sleep(1.0)
-        
+
         #finished and ready to exit
         return
 
@@ -195,21 +195,21 @@ class MainThread(threading.Thread):
         self.fan_controller = FanController()
         signal.signal(signal.SIGINT, self.exit_signal_handler)
         signal.signal(signal.SIGTERM, self.exit_signal_handler)
-        
+
     def exit_signal_handler(self, signal, frame):
         self.fan_controller.stop()
         #sys.exit(0)
-        
+
     def start(self):
         super(MainThread, self).start()
         signal.pause()
-        
+
     def run(self):
         self.fan_controller.start()
 
 scriptpath = os.path.dirname(sys.argv[0])
 
-with open('{scriptpath}/nvidiafanspeed.lock'.format(scriptpath=scriptpath), 'w') as f:
+with open('/tmp/nvidiafanspeed.pid'.format(scriptpath=scriptpath), 'w') as f:
     pid = str(os.getpid())
     f.write(pid)
 
