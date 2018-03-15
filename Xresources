@@ -1,23 +1,11 @@
-rofi.color-enabled:     true
-!                       Background  Border      Seperator
-rofi.color-window:      #66000000,  #00000000,  #00000000
-!                       Background  Foreground  Alt. Bg     HL Bg       HL Fg
-rofi.color-normal:      #232830,    #a3a8af,    #232830,    #a3a8af,    #232830
-rofi.color-active:      #232830,    #268bd2,    #eee8d5,    #268bd2,    #fdf6e3
-rofi.color-urgent:      #fdf6e3,    #dc322f,    #eee8d5,    #dc322f,    #fdf6e3
+#rofi.theme: ~/.cache/wal/colors-rofi-dark.rasi
+rofi.theme: ~/.cache/wal/colors-rofi-dark.rasi
 
-rofi.modi:              drun,window
-rofi.width:             1024
-rofi.font:              mono 20
-rofi.columns:           1
-rofi.lines:             20
-rofi.location:          0
-rofi.padding:           600
-rofi.fullscreen:        true
-rofi.levenshtein-sort:  true
-rofi.matching:          fuzzy
-rofi.case-sensitive:    true
-rofi.hide-scrollbar:    true
-rofi.tokenize:          false
-rofi.sidebar-mode:      true
+rofi.modi:                  drun,window,ssh
+rofi.width:                 960
+rofi.lines:                 5
+rofi.location:              0
+rofi.drun-match-fields:     name 
+rofi.matching:              fuzzy
+
 

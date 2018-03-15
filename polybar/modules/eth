@@ -3,7 +3,7 @@ interface = enp3s0
 interval = 3.0
 
 format-connected-underline = #55aa55
-format-connected-prefix = "CONNECTED "
+format-connected-prefix = 
 format-connected-foreground-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
 

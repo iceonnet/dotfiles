@@ -1,0 +1,8 @@
+[options]
+font = Monospace 0
+cursor_blink = off
+cursor_shape = ibeam
+
+[colors]
+background = rgba(0,0,0, 0.33)
+foreground = rgba(0,0,0, 0.1)

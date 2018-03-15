@@ -2,4 +2,4 @@
 
 (cat ~/.cache/wal/sequences&)
 
-tmux attach || tmux
+[[ $(tmux has-session 2>&1) =~ "no server" ]] && tmux || tmux attach

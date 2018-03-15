@@ -31,9 +31,9 @@ font-3 = "FontAwesome:pixelsize=12:size=12;+2"
 font-4 = "fontello:pixelsize=12:size=12;+2"
 
 modules-left = i3
-modules-center = player-mpris-tail
+modules-center = date
 #modules-right = player-mpris-tail xbacklight alsa xkeyboard memory cpu wlan eth battery temperature date powermenu
-modules-right = alsa xkeyboard memory cpu eth temperature date powermenu
+modules-right = player-mpris-tail alsa powermenu
 
 #tray-position = left
 #tray-padding = 2

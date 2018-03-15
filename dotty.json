@@ -2,7 +2,6 @@
     "directories": [
         "~/.config/dunst",
         "~/.config/sublime-text-3",
-        "~/.config/terminator",
         "~/.config/sublime-text-3/Packages/User",
         "~/.oh-my-zsh/custom/themes"
     ],
@@ -11,16 +10,17 @@
         "compton.conf": "~/.config/compton.conf",
         "dunst": "~/.config/dunst",
         "i3": "~/.config/i3",
-        "oh-my-zsh/husjon.zsh-theme": "~/.oh-my-zsh/custom/themes/husjon.zsh-theme",
+        "oh-my-zsh": "~/.oh-my-zsh/custom",
         "polybar": "~/.config/polybar",
         "ranger": "~/.config/ranger",
         "/home/husjon/Dropbox/sublime-text-3/Projects": "~/.config/sublime-text-3/Packages/User/Projects",
         "sublime-text-3/Default (Linux).sublime-keymap": "~/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
         "sublime-text-3/Package Control.sublime-settings": "~/.config/sublime-text-3/Packages/User/Package Control.sublime-settings",
         "sublime-text-3/Preferences.sublime-settings": "~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
-        "terminator": "~/.config/terminator",
+        "termite": "~/.config/termite",
         "tmux.conf": "~/.tmux.conf",
         "vimrc": "~/.vimrc",
+        "vim/after": "~/.vim/after",
         "Xresources": "~/.Xresources",
         "zshrc": "~/.zshrc"
     },

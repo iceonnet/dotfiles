@@ -11,7 +11,7 @@ ZSH_THEME="husjon"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vagrant zsh-syntax-highlighting)
+plugins=(git tmux zsh-syntax-highlighting)
 
 # User configuration
 
@@ -25,21 +25,22 @@ export LANG=en_GB.UTF-8
 
 alias gs='git status'
 alias gg='git log --oneline --abbrev-commit --all --graph --decorate --color'
-alias upgrade="for c in update upgrade autoremove autoclean; do sudo apt $c; done"
+alias upgrade='for c in update upgrade autoremove autoclean; do sudo apt $c; done'
 alias :q=exit
-alias :r=ranger
+alias ra=ranger
 alias settings="export XDG_CURRENT_DESKTOP=\"Unity\"; gnome-control-center"
 alias reset="reset; cat ~/.cache/wal/sequences"
 alias music="mpsyt set show_video false, set search_music true, q; mpsyt"
 alias yt="mpsyt set show_video true, set search_music false, q; mpsyt"
+alias vw="vi ~/vimwiki/index.wiki"
 
 
-export WORKON_HOME=$HOME/Virtual_Environments
-export PROJECT_HOME=$HOME/PycharmProjects
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/projects
 export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
-
+export GPG_TTY=$(tty)
+export LPASS_AGENT_TIMEOUT=300
 
 source /usr/local/bin/virtualenvwrapper_lazy.sh
-
 
 [ -f ~/.cache/wal/sequences ] && cat ~/.cache/wal/sequences

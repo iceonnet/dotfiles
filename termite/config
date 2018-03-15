@@ -1,0 +1,47 @@
+[options]
+font = Monospace 10
+#scrollbar = right
+mouse_autohide = true
+urgent_on_bell = true
+
+[colors]
+background = rgba(43, 48, 59, 0.9)
+#background = #2b303b
+
+# Black, Gray, Silver, White
+color0  = #2b303b
+color8  = #65737e
+color7  = #c0c5ce
+color15 = #eff1f5
+
+# Red
+color1  = #e06c75
+color9  = #e06c75
+
+# Green
+color2  = #98c379
+color10 = #98c379
+
+# Yellow
+color3  = #e5c07b
+color11 = #e5c07b
+
+# Blue
+color4  = #8fa1b3
+color12 = #8fa1b3
+
+# Purple
+color5  = #b48ead
+color13 = #b48ead
+
+# Teal
+color6  = #96b5b4
+color14 = #96b5b4
+
+
+#color16 = #d08770
+#color17 = #ab7967
+#color18 = #343d46
+#color19 = #4f5b66
+#color20 = #a7adba
+#color21 = #dfe1e8

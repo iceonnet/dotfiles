@@ -6,26 +6,6 @@
 
 
 # Variables {{{
-    # border
-        set $border_size 1
-
-    # Exec
-        set $exec               exec --no-startup-id
-
-    # Mod Key
-        set $mod                Mod4
-
-    # Monitors {{{
-        set $monitor_main       DP-4
-        set $monitor_extra      DP-0
-    # }}}
-
-    # Pulse Auto sink (get sink with pactl list sinks)
-        set $pulse_sink 1
-
-    # Screenshot Folder
-        set $screenshot_folder ~/Dropbox/Screenshots/Scrot
-
     # Workspaces {{{
         #   variable            Name
         set $workspace_01       01
@@ -40,6 +20,26 @@
         set $workspace_10       10
         set $workspace_11       11
     # }}}
+    # Monitors {{{
+        set $monitor_main       DP-4
+        set $monitor_extra      DP-0
+    # }}}
+    # border
+        set $border_size 1
+
+    # Exec
+        set $exec               exec --no-startup-id
+
+    # Mod Key
+        set $mod                Mod4
+
+
+    # Pulse Auto sink (get sink with pactl list sinks)
+        set $pulse_sink 1
+
+    # Screenshot Folder
+        set $screenshot_folder ~/Dropbox/Screenshots/Scrot
+
 # }}}
 # Config {{{
     # Fonts
@@ -52,11 +52,11 @@
         client.background           #2f343f
 
         # Colorclass                border          background      text            indicator
-        client.focused              #2f343f         #2f343f         #fcfff2         #3f3f3f
-        client.focused_inactive     #2f343f         #2f343f         #bfc4cf         #3f3f3f
-        client.unfocused            #2f343f         #2f343f         #5f646f         #3f3f3f
-        client.urgent               #2f343f         #2f343f         #ffffff         #3f3f3f
-        client.placeholder          #2f343f         #2f343f         #ffffff         #3f3f3f
+        client.focused              #2f343f         #6f747f         #fcfff2         #3f3f3f
+        client.focused_inactive     #2f343f         #0f141f         #bfc4cf         #3f3f3f
+        client.unfocused            #2f343f         #0f141f         #5f646f         #3f3f3f
+        client.urgent               #2f343f         #0f141f         #ffffff         #3f3f3f
+        client.placeholder          #2f343f         #0f141f         #ffffff         #3f3f3f
     # }}}
 
     # Startup applications
@@ -85,7 +85,7 @@
 
     # }}}
     # dmenu {{{
-        bindsym $mod+d                          $exec xrdb ~/.Xresources; $exec i3-dmenu-desktop --dmenu='rofi -matching fuzzy -dmenu -i -p ""'
+        bindsym $mod+d                          $exec xrdb ~/.Xresources; $exec rofi -show drun
         bindsym $mod+Shift+w                    $exec xrdb ~/.Xresources; $exec rofi -show window
         bindsym $mod+Shift+d                    $exec xrdb ~/.Xresources; exec ~/bin/custom_rofi_menu/main_menu.sh
         bindsym $mod+Shift+h                    $exec python Sublime_Projects/blank/test.py fetch
@@ -233,7 +233,7 @@
 
         assign      [class="VirtualBox"]                        $workspace_10
 
-        for_window [class="Google-chrome" title="^(.*?)?YouTube$"]   move to workspace $workspace_06
+        for_window [class="Google-chrome" title="^(.*?)?YouTube$"]   move to workspace $workspace_08
         for_window [class="^.*"] border pixel $border_size
         for_window [class="Spotify"] move to workspace $workspace_07
         for_window [class="M(?i)Player"] move to workspace $workspace_06
