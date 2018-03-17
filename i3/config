@@ -162,9 +162,9 @@
         bindsym $mod+3                          workspace $workspace_03;    move workspace to output DP-4;
         bindsym $mod+4                          workspace $workspace_04;    move workspace to output DP-4;
         bindsym $mod+5                          workspace $workspace_05;    move workspace to output DP-4;
-        bindsym $mod+6                          workspace $workspace_06;
+        bindsym $mod+6                          workspace $workspace_06;    move workspace to output DP-0;
         bindsym $mod+7                          workspace $workspace_07;    move workspace to output DP-0;
-        bindsym $mod+8                          workspace $workspace_08;    move workspace to output DP-0;
+        bindsym $mod+8                          workspace $workspace_08;
         bindsym $mod+9                          workspace $workspace_09;    move workspace to output DP-0;
         bindsym $mod+0                          workspace $workspace_10;    move workspace to output DP-0;
         bindsym $mod+plus                       workspace $workspace_11;    move workspace to output DP-0;
