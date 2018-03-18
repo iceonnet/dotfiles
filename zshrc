@@ -11,7 +11,7 @@ ZSH_THEME="husjon"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmux zsh-syntax-highlighting)
+plugins=(git zsh-completions tmux zsh-syntax-highlighting)
 
 # User configuration
 
@@ -43,4 +43,5 @@ export LPASS_AGENT_TIMEOUT=300
 
 source /usr/local/bin/virtualenvwrapper_lazy.sh
 
+autoload -U compinit && compinit
 [ -f ~/.cache/wal/sequences ] && cat ~/.cache/wal/sequences

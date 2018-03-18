@@ -8,8 +8,9 @@ function workon_cwd {
         GIT_DIR=`\cd $GIT_DIR; pwd`
         PROJECT_ROOT=`dirname "$GIT_DIR"`
         ENV_NAME=`basename "$PROJECT_ROOT"`
+        PYTHON=python
         if [ -f "$PROJECT_ROOT/.venv" ]; then
-            ENV_NAME=`cat "$PROJECT_ROOT/.venv"`
+            . "$PROJECT_ROOT/.venv"
         else
             return
         fi
@@ -19,7 +20,8 @@ function workon_cwd {
                 workon "$ENV_NAME"
             else
                 echo "virtual environment for ${ENV_NAME} does not exist, creating..."
-                mkvirtualenv -a $PROJECT_ROOT "$ENV_NAME" > /dev/null
+                mkvirtualenv -a $PROJECT_ROOT --python ${PYTHON} "$ENV_NAME" > /dev/null
+                python --version
 
                 echo "installing requirements.development.txt"
                 [ ! -e requirements.development.txt ] && \
