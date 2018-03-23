@@ -23,6 +23,7 @@
     set nonumber                    " hides current line number (sets to 0)
     set clipboard=unnamedplus       " Allows yank to be copied to clipboard (similar to "+y)
     set modeline
+    let mapleader=","               " leader is comma
     filetype plugin on
     filetype plugin indent on
 " }}}

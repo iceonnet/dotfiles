@@ -1,0 +1,10 @@
+#!/usr/bin/zsh
+# This hook is run after a new project is activated.
+
+NAME=$(basename $(realpath $(pwd)))
+VERSION=$(python --version 2>&1 | awk '{print $2}' | cut -d'.' -f1-2)
+
+echo "export ENV_NAME=${NAME}
+export PYTHON=python${VERSION}
+" > .venv
+
