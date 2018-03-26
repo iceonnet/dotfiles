@@ -15,7 +15,7 @@ plugins=(git zsh-completions tmux zsh-syntax-highlighting)
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/home/$USER/bin:/home/$USER/.local/bin:$PATH"
+export PATH="$PATH:/home/$USER/bin:/home/$USER/.local/bin"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -33,6 +33,7 @@ alias reset="reset; cat ~/.cache/wal/sequences"
 alias music="mpsyt set show_video false, set search_music true, q; mpsyt"
 alias yt="mpsyt set show_video true, set search_music false, q; mpsyt"
 alias vw="vi ~/vimwiki/index.wiki"
+alias v=vim
 
 
 export WORKON_HOME=$HOME/.virtualenvs
