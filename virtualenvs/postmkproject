@@ -8,3 +8,5 @@ echo "export ENV_NAME=${NAME}
 export PYTHON=python${VERSION}
 " > .venv
 
+echo "" > requirements.txt
+echo "-r requirements.txt" > requirements.dev.txt

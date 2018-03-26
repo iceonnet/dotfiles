@@ -3,7 +3,8 @@
         "~/.config/dunst",
         "~/.config/sublime-text-3",
         "~/.config/sublime-text-3/Packages/User",
-        "~/.oh-my-zsh/custom/themes"
+        "~/.oh-my-zsh/custom/themes",
+        "~/.virtualenvs"
     ],
     "link": {
         "bin": "~/bin",
@@ -21,6 +22,7 @@
         "tmux.conf": "~/.tmux.conf",
         "vimrc": "~/.vimrc",
         "vim/after": "~/.vim/after",
+        "virtualenvs": "~/.virtualenvs/postmkproject",
         "Xresources": "~/.Xresources",
         "zshrc": "~/.zshrc"
     },
