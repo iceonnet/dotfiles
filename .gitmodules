@@ -1,6 +1,3 @@
 [submodule "dotty"]
 	path = dotty
 	url = https://github.com/vibhavp/dotty.git
-[submodule "bin/custom_rofi_menu"]
-	path = bin/custom_rofi_menu
-	url = git@github.com:husjon/custom_rofi_menu.git
